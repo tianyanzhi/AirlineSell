@@ -16,7 +16,7 @@
         <property name="location" value="classpath:jdbc.properties"/>
     </bean>
     <!--    注册sqlSessionFactoryBean-->
-    <bean id="mySqlsersionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <bean id="mySqlsessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <!--指定mybatis主配置文件-->
         <property name="configLocation" value="classpath:mybatis.xml"/>
         <!--指定数据源-->
@@ -24,7 +24,7 @@
     </bean>
     <!--    生成dao代理对象-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="sqlSessionFactoryBeanName" value="mySqlsersionFactory"/>
+        <property name="sqlSessionFactoryBeanName" value="mySqlsessionFactory"/>
         <property name="basePackage" value="airline.dao"/>
     </bean>
     <!--    注册service-->

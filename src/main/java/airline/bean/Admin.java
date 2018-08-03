@@ -33,6 +33,12 @@ public class Admin {
         this.email = email;
     }
 
+/*    public Admin(String accountname, String password, char authority) {
+        this.accountname = accountname;
+        this.password = password;
+        this.authority = authority;
+    }*/
+
     public String getAccountname() {
         return accountname;
     }
@@ -89,16 +95,5 @@ public class Admin {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return "Admin{" +
-                "accountname='" + accountname + '\'' +
-                ", password='" + password + '\'' +
-                ", authority=" + authority +
-                ", name='" + name + '\'' +
-                ", sex=" + sex +
-                ", phone=" + phone +
-                ", email='" + email + '\'' +
-                '}';
-    }
+
 }

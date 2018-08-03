@@ -34,6 +34,10 @@ public class AdminServiceImpl implements IAdminService {
 
     @Override
     public boolean addAdmin(Admin admin) {
+        int count = adminDao.insertAdmin(admin);
+        if (count > 0) {
+            return true;
+        }
         return false;
     }
 

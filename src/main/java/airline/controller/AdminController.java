@@ -31,12 +31,14 @@ public class AdminController {
     }
 
     //插入数据，增加一个管理员
-    @RequestMapping("intsert.do")
+    @RequestMapping("registerAdmin.do")
     public String doInsertAdmin(Admin admin) {
+        System.err.println("######################################"+admin.getAccountname());
+        System.err.println("######################################"+admin.getAuthority());
         if (service.addAdmin(admin)) {
-            return "";
+            return "/success.jsp";
         } else {
-            return "";
+            return "/Exception/errors.jsp";
         }
     }
 }
