@@ -1,22 +1,26 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context" xsi:schemaLocation="
-        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
     <!--配置c3p0数据源-->
-    <bean id="myDataSourse" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-        <property name="driverClass" value="${jdbc.driver}"/>
-        <property name="jdbcUrl" value="${jdbc.url}"/>
-        <property name="user" value="${jdbc.user}"/>
-        <property name="password" value="${jdbc.password}"/>
+    <bean id="myDataSourse" class="com.alibaba.druid.pool.DruidDataSource"
+          init-method="init" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.driverClassName}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
     </bean>
     <!-- 注册属性文件-->
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location" value="classpath:jdbc.properties"/>
     </bean>
     <!--    注册sqlSessionFactoryBean-->
-    <bean id="mySqlsessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <bean id="mySqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <!--指定mybatis主配置文件-->
         <property name="configLocation" value="classpath:mybatis.xml"/>
         <!--指定数据源-->
@@ -24,11 +28,9 @@
     </bean>
     <!--    生成dao代理对象-->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="sqlSessionFactoryBeanName" value="mySqlsessionFactory"/>
+        <property name="sqlSessionFactoryBeanName" value="mySqlSessionFactory"/>
         <property name="basePackage" value="airline.dao"/>
     </bean>
     <!--    注册service-->
     <context:component-scan base-package="airline.service"/>
-
-
 </beans>
