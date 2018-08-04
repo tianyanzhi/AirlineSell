@@ -11,9 +11,9 @@
     <title>删除一个管理员</title>
 </head>
 <body>
-<form action="deleteAdmin.do" method="post">
-    输入你要删除的员工id：<input type="text" name="id"><br/>
-    <input type="submit" value="确认删除">
-</form>
+    <form action="deleteAdmin.do" method="post">
+        输入你要删除的员工账户名：<input type="text" name="accountname"><br/><br/>
+        <input type="submit" value="确认删除">
+    </form>
 </body>
 </html>

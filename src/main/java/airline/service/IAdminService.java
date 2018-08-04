@@ -18,7 +18,9 @@ public interface IAdminService {
     boolean addAdmin(Admin admin);
 
     //删除管理员
-    boolean moveAdmin(int id);
+    boolean moveAdmin(String accountname);
+
+    boolean alterAdminPwd(Admin admin);
 
     //修改管理员信息
     boolean modifyyAdmin();

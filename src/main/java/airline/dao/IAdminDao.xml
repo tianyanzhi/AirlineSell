@@ -7,6 +7,9 @@
         insert into feiyiban.admin(accountname,password,authority)values(#{accountname},#{password},#{authority})
     </insert>
     <delete id="deleteAdmin">
-        delete from feiiyiban.admin where id=#{xxx}
+        delete from feiyiban.admin where accountname=#{xxx}
     </delete>
+    <update id="updateAdminPwd" parameterType="airline.bean.Admin">
+        update feiyiban.admin set password=#{password} where accountname=#{accountname}
+    </update>
 </mapper>

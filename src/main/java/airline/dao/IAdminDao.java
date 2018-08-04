@@ -18,7 +18,10 @@ public interface IAdminDao {
     int insertAdmin(Admin admin);
 
     //删除管理员
-    int deleteAdmin(int id);
+    int deleteAdmin(String accountname);
+
+    //修改密码
+    int updateAdminPwd(Admin admin);
 
     //修改管理员信息
     int updateAdmin();

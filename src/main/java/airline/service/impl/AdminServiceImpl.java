@@ -42,7 +42,20 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public boolean moveAdmin(int id) {
+    public boolean moveAdmin(String accountname) {
+        int count = adminDao.deleteAdmin(accountname);
+        if (count > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean alterAdminPwd(Admin admin) {
+        int count = adminDao.updateAdminPwd(admin);
+        if (count > 0) {
+            return true;
+        }
         return false;
     }
 

@@ -39,11 +39,22 @@ public class AdminController {
             return "/Exception/errors.jsp";
         }
     }
+    //根据管理员账户名删除账户
     @RequestMapping("deleteAdmin.do")
-    public String doDeleteAdmin(int id){
-        if (service.moveAdmin(id)) {
+    public String doDeleteAdmin(String accountname){
+        if (service.moveAdmin(accountname)) {
             return "/success.jsp";
         } else {
+            return "/Exception/errors.jsp";
+        }
+    }
+    //根据账户名来更新密码
+    @RequestMapping("updateAdminPwd.do")
+    public String doUpdateAdminPwd(Admin admin){
+        //System.err.println("###############################################################"+);
+        if (service.alterAdminPwd(admin)){
+            return "success.jsp";
+        }else {
             return "/Exception/errors.jsp";
         }
     }
