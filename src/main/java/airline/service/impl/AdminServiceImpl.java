@@ -42,7 +42,7 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public boolean moveAdmin() {
+    public boolean moveAdmin(int id) {
         return false;
     }
 

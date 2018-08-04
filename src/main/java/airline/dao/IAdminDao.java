@@ -18,7 +18,7 @@ public interface IAdminDao {
     int insertAdmin(Admin admin);
 
     //删除管理员
-    int deleteAdmin();
+    int deleteAdmin(int id);
 
     //修改管理员信息
     int updateAdmin();

@@ -33,9 +33,15 @@ public class AdminController {
     //插入数据，增加一个管理员
     @RequestMapping("registerAdmin.do")
     public String doInsertAdmin(Admin admin) {
-        System.err.println("######################################"+admin.getAccountname());
-        System.err.println("######################################"+admin.getAuthority());
         if (service.addAdmin(admin)) {
+            return "/success.jsp";
+        } else {
+            return "/Exception/errors.jsp";
+        }
+    }
+    @RequestMapping("deleteAdmin.do")
+    public String doDeleteAdmin(int id){
+        if (service.moveAdmin(id)) {
             return "/success.jsp";
         } else {
             return "/Exception/errors.jsp";

@@ -6,4 +6,7 @@
     <insert id="insertAdmin" parameterType="airline.bean.Admin">
         insert into feiyiban.admin(accountname,password,authority)values(#{accountname},#{password},#{authority})
     </insert>
+    <delete id="deleteAdmin">
+        delete from feiiyiban.admin where id=#{xxx}
+    </delete>
 </mapper>
