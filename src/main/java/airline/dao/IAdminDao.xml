@@ -12,4 +12,10 @@
     <update id="updateAdminPwd" parameterType="airline.bean.Admin">
         update feiyiban.admin set password=#{password} where accountname=#{accountname}
     </update>
+    <update id="updateAdminProfile" parameterType="airline.bean.Admin">
+        update feiyiban.admin set name=#{name},sex=#{sex},phone=#{phone},email=#{email} where accountname=#{accountname}
+    </update>
+    <select id="showAdminProfile" resultType="Admin">
+        select name,sex,phone,email from feiyiban.admin where accountname=#{accountname}
+    </select>
 </mapper>

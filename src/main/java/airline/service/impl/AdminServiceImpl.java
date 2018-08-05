@@ -60,6 +60,20 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
+    public boolean alterAdminProfile(Admin admin) {
+        int count = adminDao.updateAdminProfile(admin);
+        if (count > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public Admin readAdminProfile(String accountname) {
+        return adminDao.showAdminProfile(accountname);
+    }
+
+    @Override
     public boolean modifyyAdmin() {
         return false;
     }

@@ -20,7 +20,15 @@ public interface IAdminService {
     //删除管理员
     boolean moveAdmin(String accountname);
 
+    //修改管理员密码
     boolean alterAdminPwd(Admin admin);
+
+    //修改管理员个人信息
+    boolean alterAdminProfile(Admin admin);
+
+    //查看管理员个人信息
+    //boolean readAdminProfile(String accountname);
+    public Admin readAdminProfile(String accountname);
 
     //修改管理员信息
     boolean modifyyAdmin();

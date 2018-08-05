@@ -16,14 +16,14 @@ public class Admin {
     private int authority;
     private String name;
     private int sex;
-    private int phone;
+    private String phone;
     private String email;
 
     public Admin() {
         super();
     }
 
-    public Admin(String accountname, String password, int authority, String name, int sex, int phone, String email) {
+    public Admin(String accountname, String password, int authority, String name, int sex, String phone, String email) {
         this.accountname = accountname;
         this.password = password;
         this.authority = authority;
@@ -74,11 +74,11 @@ public class Admin {
         this.sex = sex;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

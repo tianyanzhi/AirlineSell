@@ -23,6 +23,13 @@ public interface IAdminDao {
     //修改密码
     int updateAdminPwd(Admin admin);
 
+    //修改管理员个人信息
+    int updateAdminProfile(Admin admin);
+
+    //查看个人信息
+    //int showAdminProfile(String accountname);
+    Admin showAdminProfile(String accountname);
+
     //修改管理员信息
     int updateAdmin();
 
