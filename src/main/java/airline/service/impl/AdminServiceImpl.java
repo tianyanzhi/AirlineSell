@@ -74,17 +74,33 @@ public class AdminServiceImpl implements IAdminService {
     }
 
     @Override
-    public boolean modifyyAdmin() {
-        return false;
-    }
-
-    @Override
     public List<Admin> findAllAdmin() {
-        return null;
+        List<Admin> admins = adminDao.selectAllAdmin();
+        if (admins.size() > 0) {
+            return admins;
+        } else {
+            return null;
+        }
+    }
+
+
+    @Override
+    public List<Admin> findAdminByName(String name) {
+        List<Admin> admins = adminDao.selectAdminByName(name);
+        if (admins.size() > 0) {
+            return admins;
+        } else {
+            return null;
+        }
     }
 
     @Override
-    public List<Admin> findAdminByName(String acname) {
-        return null;
+    public Admin checkLogin(String accountname, String password) {
+        Admin admin = adminDao.selectAdminByAcname(accountname);
+        if (admin != null && admin.getPassword().equals(password)) {
+            return admin;
+        } else {
+            return null;
+        }
     }
 }

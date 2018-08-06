@@ -18,4 +18,14 @@
     <select id="showAdminProfile" resultType="Admin">
         select name,sex,phone,email from feiyiban.admin where accountname=#{accountname}
     </select>
+    <select id="selectAllAdmin" resultType="Admin">
+        select accountname,authority,name,sex,phone,email from feiyiban.admin
+    </select>
+    <select id="selectAdminByName" resultType="Admin">
+        select accountname,authority,name,sex,phone,email from feiyiban.admin where name like #{xxx} '%'
+    </select>
+    <select id="selectAdminByAcname" resultType="Admin">
+        select * from feiyiban.admin where accountname = #{accountname}
+    </select>
+
 </mapper>

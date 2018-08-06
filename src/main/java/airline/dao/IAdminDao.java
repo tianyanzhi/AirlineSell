@@ -30,12 +30,18 @@ public interface IAdminDao {
     //int showAdminProfile(String accountname);
     Admin showAdminProfile(String accountname);
 
-    //修改管理员信息
-    int updateAdmin();
-
-    //查找所有管理员（在页面上显示，可能需要分页）
+    //查找所有管理员（在页面上显示，需要分页）
     List<Admin> selectAllAdmin();
 
-    //根据管理员“账户名字”来查找，保留方法，可能不需要用到
-    List<Admin> selectAdminByName(String acname);
+    //根据姓名模糊查询管理员
+    List<Admin> selectAdminByName(String name);
+
+    //登陆的实现，根据账户名查找密码
+    Admin selectAdminByAcname(String accountname);
+
+
+
+
+
+
 }
