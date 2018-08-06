@@ -22,20 +22,23 @@ public class AdminInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         //获得请求的URL
         String url = httpServletRequest.getRequestURI();
-        //URL：除了login.jsp是可以公共访问，其他的URL都进行拦截控制
-        if (url.indexOf("adminLogin.do") >= 0) {
+        //URL：除了adminLogin.jsp是可以公共访问，其他的URL都进行拦截控制
+        if (url.contains("/checkLogin.do")) {
             return true;
         }
         //获得session
         HttpSession session = httpServletRequest.getSession();
         Admin admin = (Admin) session.getAttribute("admin");
         //如果有用户数据，则返回true,继续向下执行
-        if (admin != null&& !("user").equals(admin)) {
+        //&&"2".equals(admin.getAuthority()),管理员账号
+        //System.err.println("##############################################################"+admin.getAuthority());
+        if (admin != null) {
             return true;
+
         }
         //不合条件的给现提示信息，并转发到页面
         httpServletRequest.setAttribute("msg", "您还没登录，请先登录！");
-        httpServletRequest.getRequestDispatcher("adminLogin.jsp").forward(httpServletRequest, httpServletResponse);
+        httpServletRequest.getRequestDispatcher("/adminLogin.jsp").forward(httpServletRequest, httpServletResponse);
         return false;
     }
 

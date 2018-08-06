@@ -15,6 +15,7 @@
     账户名：<input type="text" name="accountname"><br/>
     密码：<input type="text" name="password"><br/>
     <input type="submit" value="登陆">
+    ${msg}
 </form>
 
 </body>

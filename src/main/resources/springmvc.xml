@@ -30,6 +30,13 @@
         <property name="defaultEncoding" value="utf-8"/>
         <property name="maxUploadSize" value="1048576"/>
     </bean>
-
+    <!--配置拦截器-->
+    <mvc:interceptors>
+        <!--  管理员拦截器-->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="airline.interceptor.AdminInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
         </beans>
