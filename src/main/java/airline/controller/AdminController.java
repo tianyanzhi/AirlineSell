@@ -62,7 +62,7 @@ public class AdminController {
     @RequestMapping("/deleteAdmin.do")
     public String doDeleteAdmin(String accountname) {
         if (service.moveAdmin(accountname)) {
-            return "WEB-INF/admin/success.jsp";
+            return "redirect:selectAllAdmin.do";
         } else {
             return "/Exception/errors.jsp";
         }
@@ -92,7 +92,7 @@ public class AdminController {
     public String doUpdateAdminProfile(Admin admin) {
         //System.err.println("###############################################################"+);
         if (service.alterAdminProfile(admin)) {
-            return "WEB-INF/admin/success.jsp";
+            return "redirect:jumpShowAd.do";
         } else {
             return "/Exception/errors.jsp";
         }

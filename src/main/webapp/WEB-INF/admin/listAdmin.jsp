@@ -32,10 +32,15 @@
             <div class="input-group">
                 <input type="text" id="t1" class="form-control" placeholder="请输入员工姓名">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" value="t1.value()" onclick="search(this.value())">搜索</button>
+                    <button class="btn btn-default" type="button" onclick="search()">搜索</button>
                 </span>
+                ${msgd}
                 <div class="col-md-8 col-md-offset-8">
-                    <button type="button" class="btn btn-success">添加管理员</button>
+                        <a href="${pageContext.request.contextPath}/jumpReAd.do">
+                            <button type="button" class="btn btn-success">
+                            添加管理员
+                            </button>
+                        </a>
                 </div>
             </div>
         </div>
@@ -69,10 +74,13 @@
                         <td>${admin.phone}</td>
                         <td>${admin.email}</td>
                         <td>
-                            <button type="button" class="btn btn-danger  btn-sm">
-                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                删除
-                            </button>
+
+                                <a href="${pageContext.request.contextPath}/deleteAdmin.do?accountname=${admin.accountname}">
+                                    <button type="button" class="btn btn-danger  btn-sm" onclick="alert('删除成功！')">
+                                    删除
+                                    </button>
+                                </a>
+
                         </td>
                     </tr>
                 </c:forEach>
@@ -126,15 +134,18 @@
                 </ul>
             </nav>
         </div>
+        <div class="col-md-2">
+            <a href="${pageContext.request.contextPath}/jumpSuAdMain.do">返回主菜单</a>
+        </div>
 
     </div>
 
 </div>
 </body>
 <script type="text/javascript">
-    function search(value){
-        document.forms[0].action="selectAdminByName.do";
-        document.forms[0].submit();
+    function search(){
+        var name = $("#t1").val();
+        window.location.href="${pageContext.request.contextPath}/selectAdminByName.do?name="+name;
     }
 </script>
 </html>

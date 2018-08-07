@@ -12,7 +12,7 @@
 </head>
 <body>
 <form action="updateAdminProfile.do" method="post">
-    当前要修改的账户名<input type="text" name="accountname"><br/><br/>
+    <input type="hidden" name="accountname" value=${admin.accountname}><br/><br/>
     姓名<input type="text" name="name"><br/><br/>
     <select name="sex">
         <option value ='1'>男</option>
