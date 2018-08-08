@@ -6,6 +6,7 @@ import airline.service.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ import java.util.List;
  * @mark null
  * @Description
  */
-@Controller("adminService")
+@Service("adminService")
 public class AdminServiceImpl implements IAdminService {
     @Autowired
     @Qualifier("IAdminDao")

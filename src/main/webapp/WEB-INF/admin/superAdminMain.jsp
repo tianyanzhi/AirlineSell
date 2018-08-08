@@ -32,11 +32,10 @@
     <a href="${pageContext.request.contextPath}/jumpShowAd.do">我的信息展板（管理员主要模块其一）</a><br><br>
     <a href="${pageContext.request.contextPath}/selectAllAdmin.do">管理员与员工列表（管理员主要模块其二）</a><br><br>
     <a href="${pageContext.request.contextPath}/">管理航空公司（管理员主要模块其三）</a><br><br>
-    <a href="${pageContext.request.contextPath}/">管理航空公司（管理员主要模块其四）</a><br><br>
-    <a href="${pageContext.request.contextPath}/">管理飞机型号（管理员主要模块其五）</a><br><br>
-    <a href="${pageContext.request.contextPath}/">管理机票信息（管理员主要模块其六）</a><br><br>
-    <a href="${pageContext.request.contextPath}/">管理订单信息（管理员主要模块其七）</a><br><br>
-    <a href="${pageContext.request.contextPath}/">报表生成（管理员主要模块其八）</a><br><br>
+    <a href="${pageContext.request.contextPath}/">管理飞机型号（管理员主要模块其四）</a><br><br>
+    <a href="${pageContext.request.contextPath}/">管理机票信息（管理员主要模块其五）</a><br><br>
+    <a href="${pageContext.request.contextPath}/jumpShowOrdersBS.do">管理订单信息（管理员主要模块其六）</a><br><br>
+    <a href="${pageContext.request.contextPath}/jumpTicketPrint.do">报表生成（管理员主要模块其七）</a><br><br>
     管理员个人业务测试：<br><br>
     <a href="${pageContext.request.contextPath}/jumpReAd.do">添加管理员</a><br><br>
     <a href="${pageContext.request.contextPath}/jumpDeAd.do">删除管理员</a><br><br>

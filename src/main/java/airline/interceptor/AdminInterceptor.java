@@ -34,7 +34,6 @@ public class AdminInterceptor implements HandlerInterceptor {
         //System.err.println("##############################################################"+admin.getAuthority());
         if (admin != null) {
             return true;
-
         }
         //不合条件的给现提示信息，并转发到页面
         httpServletRequest.setAttribute("msg", "您还没登录，请先登录！");
