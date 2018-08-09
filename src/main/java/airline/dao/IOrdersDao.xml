@@ -52,7 +52,7 @@
       flight_end, flight_starttime, flight_endtime,
       price, status, genetime,
       printtime, returntime, paytime
-        from feiyiban.orders where status = #{status} and user_name = #{user_name}
+        from feiyiban.orders where status = #{status} and user_name = #{user_name} '%'
     </select>
 
 </mapper>

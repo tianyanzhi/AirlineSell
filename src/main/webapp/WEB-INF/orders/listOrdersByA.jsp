@@ -6,7 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt" %>
 <html>
 <head>
     <!-- Bootstrap -->
@@ -62,6 +63,10 @@
                         <td>${orders.flight_start}</td>
                         <td>${orders.flight_end}</td>
                         <td>${orders.flight_starttime}</td>
+                        <%--<td>
+                            <fmt:parseDate value="${orders.flight_starttime}" pattern="yyyy-MM-dd HH:mm" var="receiveSDate"></fmt:parseDate>
+                            <fmt:formatDate pattern="yyyy-MM-dd HH:mm"  value="${receiveSDate}"/>
+                        </td>--%>
                         <td>${orders.flight_endtime}</td>
                         <td>${orders.userinfo_name}</td>
                         <td>${orders.user_phone}</td>

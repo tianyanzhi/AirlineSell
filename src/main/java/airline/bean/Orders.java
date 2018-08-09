@@ -1,5 +1,9 @@
 package airline.bean;
 
+import org.apache.ibatis.annotations.Param;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -28,9 +32,9 @@ public class Orders {
 
     private String flight_end;
 
-    private Date flight_starttime;
+    private String flight_starttime;
 
-    private Date flight_endtime;
+    private String flight_endtime;
 
     private Double price;
 
@@ -48,7 +52,7 @@ public class Orders {
         super();
     }
 
-    public Orders(Integer id, String userinfo_name, String user_name, String user_phone, String user_idcard, String flight_num, String flight_start, String flight_end, Date flight_starttime, Date flight_endtime, Double price, int status, Date genetime, Date printtime, Date returntime, Date paytime) {
+    public Orders(Integer id, String userinfo_name, String user_name, String user_phone, String user_idcard, String flight_num, String flight_start, String flight_end, String flight_starttime, String flight_endtime, Double price, int status, Date genetime, Date printtime, Date returntime, Date paytime) {
         this.id = id;
         this.userinfo_name = userinfo_name;
         this.user_name = user_name;
@@ -131,19 +135,19 @@ public class Orders {
         this.flight_end = flight_end;
     }
 
-    public Date getFlight_starttime() {
+    public String getFlight_starttime() {
         return flight_starttime;
     }
 
-    public void setFlight_starttime(Date flight_starttime) {
+    public void setFlight_starttime(String flight_starttime) {
         this.flight_starttime = flight_starttime;
     }
 
-    public Date getFlight_endtime() {
+    public String getFlight_endtime() {
         return flight_endtime;
     }
 
-    public void setFlight_endtime(Date flight_endtime) {
+    public void setFlight_endtime(String flight_endtime) {
         this.flight_endtime = flight_endtime;
     }
 

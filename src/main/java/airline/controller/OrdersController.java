@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,13 +41,24 @@ public class OrdersController {
         this.service = service;
     }
 
-    //添加订单
+    //添加订单，用户业务
     @RequestMapping("jumpAddOrder.do")
     public String jumpAddOrder(){
         return "WEB-INF/orders/addOrder.jsp";
     }
     @RequestMapping("/addOrder.do")
-    public String doInsertOrder(Orders order){
+    public String doInsertOrder(HttpServletRequest request, Orders order){
+        /*//当前时间
+        //sdtime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        //出发时间
+        String sdtime = request.getParameter("flight_starttime");
+        String sdtimen = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(sdtime);
+        order.setFlight_starttime(Timestamp.valueOf(sdtimen));
+        //到达时间
+        String edtime = request.getParameter("flight_endtime");
+        String edtimen = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(edtime);
+        order.setFlight_starttime(Timestamp.valueOf(edtimen));
+        System.err.println("#################################################################"+order.getFlight_starttime());*/
         if (service.addOrder(order)){
             return "WEB-INF/orders/success.jsp";
         }else {
@@ -100,14 +114,18 @@ public class OrdersController {
     //机票打印，根据用户身份证号码查询
     @RequestMapping("jumpTicketPrint.do")
     public String jumpTicketPrint(){
-        return "WEB-INF/orders/reportAndPrint.jsp";
+        return "WEB-INF/orders/getIDToPrint.jsp";
     }
     @RequestMapping("ticketPrint.do")
     public String doTicketPrint(HttpServletRequest request, Model model) {
         String user_idcard = request.getParameter("user_idcard");
         Orders order = this.service.findOrderByID(user_idcard);
         model.addAttribute("order", order);
-        return "WEB-INF/orders/ticketPrint.jsp";
+        if(order!=null){
+            return "WEB-INF/orders/ticketPrint.jsp";
+        }else {
+            return "/Exception/errors.jsp";//没有找到相关的机票信息，请检查你输入的身份证号码是否有误
+        }
     }
 
     //用户根据自己的账户名与订单状态查询相应订单
