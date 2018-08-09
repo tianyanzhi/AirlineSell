@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="airline.dao.IFlightinfoDao">
+    <!-- 插入-->
+    <insert id="insertFightinfo">
+    insert into flightinfo(flightnumber,airplanetype_name,airlinecompany_name,start,end,starttime,endtime,firstprice,businessprice,economyprice)values
+    (#{flightnumber},#{airplanetype_name},#{airlinecompany_name},#{start},#{end},#{starttime},#{endtime},#{firstprice},#{businessprice},#{economyprice})
+    </insert>
+
+    <!-- 删除-->
+    <delete id="deleteFightinfo">
+        delete from flightinfo where flightnumber=#{flightnumber}
+    </delete>
+    <!-- 根据机型删除-->
+    <delete id="deleteFightinfo1">
+        delete from flightinfo where airplanetype_name=#{airplanetype_name}
+    </delete>
+    <!-- 根据公司删除-->
+    <delete id="deleteFightinfo2">
+        delete from flightinfo where airlinecompany_name=#{airlinecompany_name}
+    </delete>
+    <!-- 查询所有-->
+    <select id="selectAllFlightinfo" resultType="Flightinfo">
+        select flightnumber,airplanetype_name,airlinecompany_name,start,end,starttime,endtime,firstprice,businessprice,economyprice from flightinfo order by flightnumber asc
+    </select>
+    <!-- 根据公司查询航班信息-->
+    <select id="selectFlightinfoByAirlinecompanyName" resultType="Flightinfo">
+        select flightnumber,airplanetype_name,airlinecompany_name,start,end,starttime,endtime,firstprice,businessprice,economyprice from flightinfo where airlinecompany_name like #{xxx} '%' order by flightnumber asc
+    </select>
+
+</mapper>

@@ -147,11 +147,11 @@
                                 <div id="dropdown-flightinfo" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
-                                            <li><a href="airlines.jsp">航空公司</a>
+                                            <li><a href="${pageContext.request.contextPath}/selectAllAirlinecompany.do">航空公司</a>
                                             </li>
-                                            <li><a href="planes_type.jsp">飞机型号</a>
+                                            <li><a href="${pageContext.request.contextPath}/selectAllAirplanetype.do">飞机型号</a>
                                             </li>
-                                            <li><a href="ticket_info.jsp">机票信息</a>
+                                            <li><a href="${pageContext.request.contextPath}/selectAllFlightinfo.do">航班信息</a>
                                             </li>
 
                                         </ul>

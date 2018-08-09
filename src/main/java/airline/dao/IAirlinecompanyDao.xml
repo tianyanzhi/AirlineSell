@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="airline.dao.IAirlinecompanyDao">
+    <!-- 插入-->
+    <insert id="insertAirlinecompany">
+       insert into airlinecompany(name,companycode,address,website,phone)values
+       (#{name},#{companycode},#{address},#{website},#{phone})
+   </insert>
+    <!-- 删除-->
+    <delete id="deleteAirlinecompanyByName">
+        delete from airlinecompany where name=#{name}
+    </delete>
+    <!-- 修改机型数据-->
+    <update id="updateAirlinecompany" parameterType="Airlinecompany">
+        update airlinecompany set name=#{name},companycode=#{companycode},address=#{address},website=#{website},phone=#{phone} where name=#{name}
+    </update>
+    <!--查询所有机型-->
+    <select id="selectAllAirlinecompany" resultType="Airlinecompany">
+        select name,companycode,address,website,phone from airlinecompany order by companycode asc
+    </select>
+    <!--根据公司名查询-->
+    <select id="selectAirlinecompanyByName" resultType="Airlinecompany" parameterType="string">
+        select name,companycode,address,website,phone from airlinecompany where name like #{xxx} '%' order by companycode asc
+    </select>
+</mapper>
