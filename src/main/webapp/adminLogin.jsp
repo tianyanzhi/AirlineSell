@@ -32,6 +32,14 @@
         body{
             background-image: url(img/bg/picjumbo.com_HNCK3558.jpg);
         }
+        input{
+            box-sizing: border-box;
+            border:1px solid rgba(0, 0, 0,1.00);
+            color:#000000;
+            text-decoration:none;
+            width:100%;
+            font-family: "Ó×Ô²";
+        }
     </style>
 </head>
 
@@ -88,7 +96,7 @@
 <script type="text/javascript" src="lib/js/ace/mode-html.js"></script>
 <script type="text/javascript" src="lib/js/ace/theme-github.js"></script>
 <!-- Javascript -->
-<script type="text/javascript" src="../../js/app.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
 
 <!--µÇÂ½¼ì²é-->
 <script language="JavaScript">

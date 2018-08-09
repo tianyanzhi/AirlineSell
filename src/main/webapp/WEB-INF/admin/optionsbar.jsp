@@ -173,7 +173,6 @@
                                     </div>
                                 </div>
                             </li>
-
                             <li class="panel panel-default dropdown">
                                 <a data-toggle="collapse" href="#dropdown-Managementuser">
                                     <span class="icon fa fa-group"></span><span class="title">人员管理</span>

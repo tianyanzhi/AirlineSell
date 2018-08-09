@@ -77,7 +77,7 @@ public class AdminController {
     public String doUpdateAdminPwd(Admin admin) {
         //System.err.println("###############################################################"+);
         if (service.alterAdminPwd(admin)) {
-            return "WEB-INF/admin/success.jsp";
+            return "redirect:adminOutLogin.do";
         } else {
             return "/Exception/errors.jsp";
         }
@@ -89,9 +89,10 @@ public class AdminController {
         return "WEB-INF/admin/updateAdminProfile.jsp";
     }
     @RequestMapping("/updateAdminProfile.do")
-    public String doUpdateAdminProfile(Admin admin) {
+    public String doUpdateAdminProfile(Admin admin,HttpSession session) {
         //System.err.println("###############################################################"+);
         if (service.alterAdminProfile(admin)) {
+            session.setAttribute("admin",admin);//更新当前session的用户
             return "redirect:jumpShowAd.do";
         } else {
             return "/Exception/errors.jsp";
