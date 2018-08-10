@@ -48,7 +48,7 @@ public class AdminController {
     @RequestMapping("/registerAdmin.do")
     public String doInsertAdmin(Admin admin) {
         if (service.addAdmin(admin)) {
-            return "WEB-INF/admin/success.jsp";
+            return "WEB-INF/admin/addAdmin.jsp";
         } else {
             return "/Exception/errors.jsp";
         }
@@ -120,16 +120,16 @@ public class AdminController {
         return "WEB-INF/admin/listAdmin.jsp";
     }
     @RequestMapping("/selectAllAdmin.do")
-    public String doSelectAllAdmin(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
+    public String doSelectAllAdmin(@RequestParam(value = "pn", defaultValue = "1") Integer pn,Model model) {
         // 引入PageHelper分页插件
         // 在查询之前只需要调用，传入页码，以及每页的大小
-        int pageSize = 5;
-        PageHelper.startPage(pn, pageSize);
+        int pageSize = 10000;
+        PageHelper.startPage(pn,pageSize);
         // startPage后面紧跟的这个查询就是一个分页查询
         List<Admin> admins = service.findAllAdmin();
         // 使用pageInfo包装查询后的结果，只需要将pageInfo交给页面就行了。
         // 封装了详细的分页信息,包括有我们查询出来的数据，传入连续显示的页数
-        PageInfo page = new PageInfo(admins, 5);
+        PageInfo page = new PageInfo(admins,pageSize);
         model.addAttribute("pageInfo", page);
         return "WEB-INF/admin/listAdmin.jsp";
     }

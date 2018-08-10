@@ -33,6 +33,15 @@ public interface IOrdersDao {
     //  列出已完成的订单         status=5，   可以生成报表，也可以用来看看
     List<Orders> selectOrdersByStatus(int status);
 
+    //列出未通过确认支付的订单 status=1
+    List<Orders> selectOrdersBySta1();
+
+    //列出未通过确认退票的订单 status=3
+    List<Orders> selectOrdersBySta3();
+
+    //列出已完成的订单         status=5
+    List<Orders> selectOrdersBySta5();
+
     //备用搜索框根据用户名搜索相应订单
     List<Orders> selectOrdersByUserName(String user_name);
 

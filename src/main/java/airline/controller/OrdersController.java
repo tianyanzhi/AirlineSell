@@ -73,7 +73,13 @@ public class OrdersController {
     @RequestMapping("updateOrderStatus.do")
     public String doUpdateOrderStatus(Orders order){
         if (service.alterOrderStatus(order)){
-            return "redirect:jumpShowOrdersBS.do";
+            if(order.getStatus()==2){
+                return "redirect:showOrdersBySta1.do";
+            }else if (order.getStatus()==4){
+                return "redirect:showOrdersBySta3.do";
+            } else {
+                return "/Exception/errors.jsp";
+            }
         }else {
             return "/Exception/errors.jsp";
         }
@@ -85,10 +91,48 @@ public class OrdersController {
     }
     @RequestMapping("showOrdersBySta.do")
     public String doShowOrdersBySta(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model, int status){
-        int pageSize = 5;
+        int pageSize = 10000;
         PageHelper.startPage(pn, pageSize);
         List<Orders> orders = service.findOrdersByStatus(status);
-        PageInfo page = new PageInfo(orders, 5);
+        PageInfo page = new PageInfo(orders, pageSize);
+        model.addAttribute("pageInfo", page);
+        return "WEB-INF/orders/listOrdersByA.jsp";
+    }
+    /*@RequestMapping("jumpShowOrdersBS1.do")//尝试解决导航栏无法实现动作脚本，失败
+    public String jumpShowOrdersBS1(){
+        return "redirect:showOrdersBySta.do?status=1";
+    }
+    @RequestMapping("jumpShowOrdersBS3.do")
+    public String jumpShowOrdersBS3(){
+        return "redirect:showOrdersBySta.do?status=3";
+    }*/
+    //支付待审核
+    @RequestMapping("showOrdersBySta1.do")
+    public String doShowOrdersBySta1(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model){
+        int pageSize = 10000;
+        PageHelper.startPage(pn, pageSize);
+        List<Orders> orders = service.findOrdersBySta1();
+        PageInfo page = new PageInfo(orders, pageSize);
+        model.addAttribute("pageInfo", page);
+        return "WEB-INF/orders/listOrdersByA.jsp";
+    }
+    //退票待审核
+    @RequestMapping("showOrdersBySta3.do")
+    public String doShowOrdersBySta3(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model){
+        int pageSize = 10000;
+        PageHelper.startPage(pn, pageSize);
+        List<Orders> orders = service.findOrdersBySta3();
+        PageInfo page = new PageInfo(orders, pageSize);
+        model.addAttribute("pageInfo", page);
+        return "WEB-INF/orders/listOrdersByA.jsp";
+    }
+    //已完成
+    @RequestMapping("showOrdersBySta5.do")
+    public String doShowOrdersBySta5(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model){
+        int pageSize = 10000;
+        PageHelper.startPage(pn, pageSize);
+        List<Orders> orders = service.findOrdersBySta5();
+        PageInfo page = new PageInfo(orders, pageSize);
         model.addAttribute("pageInfo", page);
         return "WEB-INF/orders/listOrdersByA.jsp";
     }
@@ -124,7 +168,8 @@ public class OrdersController {
         if(order!=null){
             return "WEB-INF/orders/ticketPrint.jsp";
         }else {
-            return "/Exception/errors.jsp";//没有找到相关的机票信息，请检查你输入的身份证号码是否有误
+            model.addAttribute("msgn", "没有找到相关的机票信息，请检查你输入的身份证号码是否有误");
+            return "WEB-INF/orders/getIDToPrint.jsp";//没有找到相关的机票信息，请检查你输入的身份证号码是否有误
         }
     }
 

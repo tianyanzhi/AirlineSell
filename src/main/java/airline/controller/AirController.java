@@ -84,10 +84,10 @@ public class AirController {
     public String jumpListAa(){ return "/WEB-INF/airline/listAirplanetype.jsp"; }
     @RequestMapping("/selectAllAirplanetype.do")
     public String doSelectAllAirplanetype(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
-        int pageSize = 5;
+        int pageSize = 10000;
         PageHelper.startPage(pn, pageSize);
         List<Airplanetype> airplanetypes = airplanetypeService.findAllAirplanetype();
-        PageInfo page = new PageInfo(airplanetypes, 5);
+        PageInfo page = new PageInfo(airplanetypes, pageSize);
         model.addAttribute("pageInfo", page);
         return "/WEB-INF/airline/listAirplanetype.jsp";
     }
@@ -143,10 +143,10 @@ public class AirController {
     public String jumpListAc(){ return "/WEB-INF/airline/listAirlinecompany.jsp"; }
     @RequestMapping("/selectAllAirlinecompany.do")
     public String doSelectAllAirlinecompany(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
-        int pageSize = 5;
+        int pageSize = 10000;
         PageHelper.startPage(pn, pageSize);
         List<Airlinecompany> airlinecompanies = airlinecompanyService.findAllAirlinecompany();
-        PageInfo page = new PageInfo(airlinecompanies, 5);
+        PageInfo page = new PageInfo(airlinecompanies, pageSize);
         model.addAttribute("pageInfo", page);
         return "/WEB-INF/airline/listAirlinecompany.jsp";
     }
@@ -196,14 +196,21 @@ public class AirController {
     public String doSelectAllFlight(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
         // 引入PageHelper分页插件
         // 在查询之前只需要调用，传入页码，以及每页的大小
-        int pageSize = 5;
+        int pageSize = 10000;
         PageHelper.startPage(pn, pageSize);
         // startPage后面紧跟的这个查询就是一个分页查询
         List<Flightinfo> flightinfos = flightinfoService.findAllFlightinfo();
         // 使用pageInfo包装查询后的结果，只需要将pageInfo交给页面就行了。
         // 封装了详细的分页信息,包括有我们查询出来的数据，传入连续显示的页数
-        PageInfo page = new PageInfo(flightinfos, 5);
+        PageInfo page = new PageInfo(flightinfos, pageSize);
         model.addAttribute("pageInfo", page);
+        //尝试做公司与型号的实时下拉框
+        List<Airlinecompany> companies = airlinecompanyService.findAllAirlinecompany();
+        PageInfo companypage = new PageInfo(companies, pageSize);
+        model.addAttribute("pageForCompany", companypage);
+        List<Airplanetype> types = airplanetypeService.findAllAirplanetype();
+        PageInfo typepage = new PageInfo(types, pageSize);
+        model.addAttribute("pageForType", typepage);
         return "/WEB-INF/airline/listFlightinfo.jsp";
     }
 

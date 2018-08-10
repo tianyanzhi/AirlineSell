@@ -30,6 +30,30 @@
       printtime, returntime, paytime
         from feiyiban.orders where status = #{status}
     </select>
+    <select id="selectOrdersBySta1" resultType="Orders">
+        select id, user_name, userinfo_name,user_phone,
+      user_idcard, flight_num, flight_start,
+      flight_end, flight_starttime, flight_endtime,
+      price, status, genetime,
+      printtime, returntime, paytime
+        from feiyiban.orders where status = 1
+    </select>
+    <select id="selectOrdersBySta3" resultType="Orders">
+        select id, user_name, userinfo_name,user_phone,
+      user_idcard, flight_num, flight_start,
+      flight_end, flight_starttime, flight_endtime,
+      price, status, genetime,
+      printtime, returntime, paytime
+        from feiyiban.orders where status = 3
+    </select>
+    <select id="selectOrdersBySta5" resultType="Orders">
+        select id, user_name, userinfo_name,user_phone,
+      user_idcard, flight_num, flight_start,
+      flight_end, flight_starttime, flight_endtime,
+      price, status, genetime,
+      printtime, returntime, paytime
+        from feiyiban.orders where status = 5
+    </select>
     <select id="selectOrdersByUserName" resultType="Orders">
         select id,user_name,userinfo_name, user_phone,
       user_idcard, flight_num, flight_start,

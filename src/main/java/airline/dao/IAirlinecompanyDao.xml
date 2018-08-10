@@ -14,7 +14,7 @@
     </delete>
     <!-- 修改机型数据-->
     <update id="updateAirlinecompany" parameterType="Airlinecompany">
-        update airlinecompany set name=#{name},companycode=#{companycode},address=#{address},website=#{website},phone=#{phone} where name=#{name}
+        update airlinecompany set companycode=#{companycode},address=#{address},website=#{website},phone=#{phone} where name=#{name}
     </update>
     <!--查询所有机型-->
     <select id="selectAllAirlinecompany" resultType="Airlinecompany">

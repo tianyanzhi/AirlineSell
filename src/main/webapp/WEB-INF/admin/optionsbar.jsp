@@ -93,10 +93,16 @@
                 <nav class="navbar navbar-default" role="navigation">
                     <div class="side-menu-container">
                         <div class="navbar-header">
-                            <a class="navbar-brand" href="${pageContext.request.contextPath}/jumpSuAdMain.do">
+
+                            <c:if test="${admin.authority eq '1'}"><a class="navbar-brand" href="${pageContext.request.contextPath}/jumpAdMain.do">
                                 <div class="icon fa fa-paper-plane"></div>
                                 <div class="title">飞一般</div>
-                            </a>
+                            </a></c:if>
+                            <c:if test="${admin.authority eq '2'}"><a class="navbar-brand" href="${pageContext.request.contextPath}/jumpSuAdMain.do">
+                                <div class="icon fa fa-paper-plane"></div>
+                                <div class="title">飞一般</div>
+                            </a></c:if>
+
                             <button type="button" class="navbar-expand-toggle pull-right visible-xs">
                                 <i class="fa fa-times icon"></i>
                             </button>
@@ -104,9 +110,13 @@
                         <ul class="nav navbar-nav">
                             <li>
                                 <%--实际上主页和初始页面代码相同--%>
-                                <a href="${pageContext.request.contextPath}/jumpSuAdMain.do">
-                                    <span class="icon fa fa-home"></span><span class="title">主页</span>
-                                </a>
+                                    <c:if test="${admin.authority eq '1'}"><a href="${pageContext.request.contextPath}/jumpAdMain.do">
+                                        <span class="icon fa fa-home"></span><span class="title">主页</span>
+                                    </a></c:if>
+                                    <c:if test="${admin.authority eq '2'}"><a href="${pageContext.request.contextPath}/jumpSuAdMain.do">
+                                        <span class="icon fa fa-home"></span><span class="title">主页</span>
+                                    </a></c:if>
+
                             </li>
                             <li class="panel panel-default dropdown">
                                 <a data-toggle="collapse" href="#dropdown-customer">
@@ -130,9 +140,9 @@
                                 <div id="dropdown-ticket" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
-                                            <li><a href="${pageContext.request.contextPath}/showOrdersBySta.do?status=1">订票审核</a>
+                                            <li><a href="${pageContext.request.contextPath}/showOrdersBySta1.do">订票审核</a>
                                             </li>
-                                            <li><a href="${pageContext.request.contextPath}/showOrdersBySta.do?status=3">退票管理</a>
+                                            <li><a href="${pageContext.request.contextPath}/showOrdersBySta3.do">退票管理</a>
                                             </li>
 
                                         </ul>

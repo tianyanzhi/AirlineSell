@@ -25,7 +25,8 @@
 </head>
 <body>
 <%--引入页面--%>
-<jsp:include page="/WEB-INF/admin/optionsbar.jsp" />
+<c:if test="${admin.authority eq '1'}"><jsp:include page="/WEB-INF/admin/optionsbarless.jsp" /></c:if>
+<c:if test="${admin.authority eq '2'}"><jsp:include page="/WEB-INF/admin/optionsbar.jsp" /></c:if>
 <!-- Main Content -->
 <div class="container-fluid">
     <div class="side-body">
@@ -141,6 +142,11 @@
         </div>
     </div>
 </div>
+<footer class="app-footer">
+    <div class="wrapper">
+        <span class="pull-right">2.1 <a href="#"><i class="fa fa-long-arrow-up"></i></a></span> © feiyiban2018 Copyright.
+    </div>
+</footer>
 <!-- Javascript Libs -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/bootstrap.min.js"></script>

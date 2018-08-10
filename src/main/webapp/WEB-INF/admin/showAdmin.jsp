@@ -26,7 +26,8 @@
 
 <body>
 <%--引入页面--%>
-<jsp:include page="/WEB-INF/admin/optionsbar.jsp" />
+<c:if test="${admin.authority eq '1'}"><jsp:include page="/WEB-INF/admin/optionsbarless.jsp" /></c:if>
+<c:if test="${admin.authority eq '2'}"><jsp:include page="/WEB-INF/admin/optionsbar.jsp" /></c:if>
 <!-- Main Content -->
 <div class="container-fluid">
     <div class="side-body">
@@ -58,21 +59,22 @@
                                                 <%--<iframe src="${pageContext.request.contextPath}/jumpUpAdPwd.do" width="100%" height="50%" scrolling="no" frameborder="0"> </iframe>--%>
                                                     <form class="form-horizontal" action="updateAdminPwd.do" method="post">
                                                         <div class="form-group">
-                                                            <label for="inputEmail3" class="col-sm-2 control-label">新密码</label>
+                                                            <label for="inputPassword2" class="col-sm-2 control-label">新密码</label>
                                                             <div class="col-sm-10">
                                                                 <input type="hidden" name="accountname" value=${admin.accountname}>
-                                                                <input type="password" class="form-control" name="password" id="inputEmail3" pattern="^\w{3,20}$" minlength="6" maxlength="12" placeholder="6-12位数字与字母的结合">
+                                                                <input type="password" class="form-control" name="password" id="inputPassword2" required pattern="^\w{3,20}$" minlength="6" maxlength="12" placeholder="6-12位数字与字母的结合">
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="inputPassword3" class="col-sm-2 control-label">确认密码</label>
                                                             <div class="col-sm-10">
-                                                                <input type="password" class="form-control" id="inputPassword3" pattern="^\w{3,20}$" minlength="6" maxlength="12" placeholder="6-12位数字与字母的结合">
+                                                                <input type="password" class="form-control" id="inputPassword3" required pattern="^\w{3,20}$" minlength="6" maxlength="12" placeholder="6-12位数字与字母的结合">
                                                             </div>
                                                         </div>
+                                                        <div id="msg" style="color:red;"></div>
                                                         <div class="form-group">
                                                             <div class="col-sm-offset-2 col-sm-10">
-                                                                <button type="submit" class="btn btn-default">确认修改</button>&nbsp;&nbsp;*更改密码后需要重新登陆
+                                                                <button type="submit" class="btn btn-primary" onclick="return checkpwd()">确认修改</button>&nbsp;&nbsp;*更改密码后需要重新登陆
                                                             </div>
                                                         </div>
                                                     </form>
@@ -126,14 +128,14 @@
                                                             <div class="col-sm-10">
                                                                 <input type="hidden" name="accountname" value=${admin.accountname}>
                                                                 <input type="hidden" name="authority" value=${admin.authority}>
-                                                                <input type="text" name="name" class="form-control" id="inputName" placeholder="">
+                                                                <input type="text" name="name" class="form-control" id="inputName" required placeholder="">
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <label class="col-sm-2 control-label">性别</label>
                                                             <div class="col-sm-10">
                                                                     <div class="radio3 radio-check radio-success radio-inline">
-                                                                        <input type="radio" id="radio4" name="sex" value="1">
+                                                                        <input type="radio" id="radio4" name="sex" required value="1">
                                                                         <label for="radio4">
                                                                             帅哥
                                                                         </label>
@@ -149,18 +151,18 @@
                                                         <div class="form-group">
                                                             <label for="inputPhone" class="col-sm-2 control-label">电话</label>
                                                             <div class="col-sm-10">
-                                                                <input type="text" name="phone" class="form-control" id="inputPhone" placeholder="">
+                                                                <input type="text" name="phone" class="form-control" id="inputPhone" required placeholder="">
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="inputEmail" class="col-sm-2 control-label">邮箱</label>
                                                             <div class="col-sm-10">
-                                                                <input type="text" name="email" class="form-control" id="inputEmail" placeholder="">
+                                                                <input type="text" name="email" class="form-control" id="inputEmail" required placeholder="">
                                                             </div>
                                                         </div>
                                                         <div class="form-group">
                                                             <div class="col-sm-offset-2 col-sm-10">
-                                                                <button type="submit" class="btn btn-default">确认修改</button>&nbsp;&nbsp;
+                                                                <button type="submit" class="btn btn-primary">确认修改</button>&nbsp;&nbsp;
                                                             </div>
                                                         </div>
                                                     </form>
@@ -176,6 +178,11 @@
         </div>
     </div>
 </div>
+<footer class="app-footer">
+    <div class="wrapper">
+        <span class="pull-right">2.1 <a href="#"><i class="fa fa-long-arrow-up"></i></a></span> © feiyiban2018 Copyright.
+    </div>
+</footer>
 <!-- Javascript Libs -->
 <script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/bootstrap.min.js"></script>
@@ -193,4 +200,17 @@
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/index.js"></script>
 
 </body>
+
+<script type="text/javascript">
+    function checkpwd(){
+        var p1=$("#inputPassword2").val();//获取密码框的值
+        var p2=$("#inputPassword3").val();//获取重新输入的密码值
+        if(p1!=p2){//判断两次输入的值是否一致，不一致则显示错误信息
+            alert("两次密码不一致！");
+            return false;
+        }else{
+            //密码一致，可以继续下一步操作
+        }
+    }
+</script>
 </html>

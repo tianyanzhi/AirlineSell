@@ -6,133 +6,215 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE HTML>
 <html>
 <head>
-    <link href="${pageContext.request.contextPath}/bootstrap/css/bootstrap.css" rel="stylesheet">
-    <script src="${pageContext.request.contextPath}/js/jquery-3.0.0.js"></script>
-    <script src="${pageContext.request.contextPath}/bootstrap/js/bootstrap.js"></script>
-    <title>列出机型</title>
+    <title>飞机型号</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:300,400' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>
+    <!-- CSS Libs -->
+    <link rel="stylesheet" type="text/css" href="../lib/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../lib/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="../lib/css/checkbox3.min.css">
+    <link rel="stylesheet" type="text/css" href="../lib/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="../lib/css/dataTables.bootstrap.css">
+    <!-- CSS App -->
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <link rel="stylesheet" type="text/css" href="../css/themes/flat-blue.css">
 </head>
 <body>
-<div class="container">
-    <!--标题-->
-    <div class="row">
-        <div class="col-md-4 col-md-offset-4">
-            <h2>机型列表</h2>
+<%--引入页面--%>
+<c:if test="${admin.authority eq '1'}"><jsp:include page="/WEB-INF/admin/optionsbarless.jsp" /></c:if>
+<c:if test="${admin.authority eq '2'}"><jsp:include page="/WEB-INF/admin/optionsbar.jsp" /></c:if>
+<!-- Main Content -->
+<div class="container-fluid">
+    <div class="side-body">
+        <div class="page-title">
+            <span class="title">机型管理</span>
+            <div class="description">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Here you can manage your aircraft model.</div>
         </div>
-    </div>
-    <br>
-    <!--搜索框-->
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="input-group">
-                <input type="text" id="t1" class="form-control" placeholder="输入机型名">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" onclick="search()">搜索</button>
-                </span>
-                ${msgd}
-                <div class="col-md-8 col-md-offset-8">
-                        <a href="${pageContext.request.contextPath}/jumpAddAp.do">
-                            <button type="button" class="btn btn-success">
-                            添加机型信息
-                            </button>
-                        </a>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <div class="title">机型列表</div>
+                        </div>
+                        <div class="pull-right card-action">
+                            <div class="btn-group" role="group" aria-label="...">
+                                <button type="button" class="btn btn-primary  btn-primary" data-toggle="modal" data-target="#modalPrimary0">新增飞机型号</button>
+                                <!-- Modal -->
+                                <div class="modal fade modal-primary" id="modalPrimary0" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                <h4 class="modal-title" id="myModalLabe0">添加飞机型号信息</h4>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <form class="form-horizontal" action="${pageContext.request.contextPath}/addAirplanetype.do" method="post">
+                                                    <div class="form-group">
+                                                        <label for="input8" class="col-sm-2 control-label">机型名称</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control" name="name" id="input8" required placeholder="xxx">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="input4" class="col-sm-2 control-label">头等舱数</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control" name="firstnum" id="input4" required placeholder="xxx">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="input5" class="col-sm-2 control-label">商务舱数</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control" name="businessnum" id="input5" required placeholder="xxx">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="input6" class="col-sm-2 control-label">经济舱数</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control" name="economynum" id="input6" required placeholder="xxx">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="col-sm-offset-2 col-sm-10">
+                                                            <button type="submit" class="btn btn-primary">确认添加</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="datatable table table-hover" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>机型名</th>
+                                <th>头等舱数量</th>
+                                <th>商务舱数量</th>
+                                <th>经济舱数量</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${pageInfo.list}" var="airplanetype">
+                                <tr>
+                                    <td>${airplanetype.name}</td>
+                                    <td>${airplanetype.firstnum}</td>
+                                    <td>${airplanetype.businessnum}</td>
+                                    <td>${airplanetype.economynum}</td>
+                                    <td>
+
+                                            <%--<button type="button" class="btn btn-info  btn-sm" data-toggle="modal" data-target="#modalPrimary1">修改</button>
+                                            <!-- Modal -->
+                                            <div class="modal fade modal-primary" id="modalPrimary1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                            <h4 class="modal-title" id="myModalLabel">修改公司信息</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+
+                                                            <form class="form-horizontal" action="${pageContext.request.contextPath}/alterAirlinecompany.do" method="post">
+                                                                <div class="form-group">
+                                                                    <label for="input1" class="col-sm-2 control-label">公司代码</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="hidden" name="name" value=${airlinecompany.name}>
+                                                                        <input type="text" class="form-control" name="companycode" id="input1" required placeholder="xxx">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="input2" class="col-sm-2 control-label">公司地址</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control" name="address" id="input2" required placeholder="xxx">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="input3" class="col-sm-2 control-label">公司网址</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control" name="website" id="input3" required placeholder="xxx">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="inputPassword2" class="col-sm-2 control-label">联系方式</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input type="text" class="form-control" name="phone" id="inputPassword2" required placeholder="xxx">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <div class="col-sm-offset-2 col-sm-10">
+                                                                        <button type="submit" class="btn btn-primary">确认修改</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>--%>
+
+
+
+                                        <button type="button" class="btn btn-danger  btn-sm" data-toggle="modal" data-target="#modalPrimary2">删除</button>
+                                        <!-- Modal -->
+                                        <div class="modal fade modal-primary" id="modalPrimary2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                        <h4 class="modal-title" id="myModalLabe2">删除该机型</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        此操作将不可逆，是否删除？
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                                        <a href="${pageContext.request.contextPath}/deleteAirplanetype.do?name=${airplanetype.name}">
+                                                            <button type="button" class="btn btn-danger">确认删除</button>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <br>
-    <!--表格-->
-    <div class="row">
-        <div class="col-md-12">
-            <table class="table table-hover">
-                <tr>
-                    <th>机型名</th>
-                    <th>头等舱数量</th>
-                    <th>商务舱数量</th>
-                    <th>经济舱数量</th>
-                    <th></th>
-                </tr>
-                <c:forEach items="${pageInfo.list}" var="airplanetype">
-                    <tr>
-                        <td>${airplanetype.name}</td>
-                        <td>${airplanetype.firstnum}</td>
-                        <td>${airplanetype.businessnum}</td>
-                        <td>${airplanetype.economynum}</td>
-                        <td>
-                            <a href="${pageContext.request.contextPath}/jumpAlterAp.do">
-                                <button type="button" class="btn btn-danger  btn-sm" onclick="alert('点击修改！')">
-                                    修改
-                                </button>
-                            </a>
-                            <a href="${pageContext.request.contextPath}/deleteAirplanetype.do?name=${airplanetype.name}">
-                                <button type="button" class="btn btn-danger  btn-sm" onclick="alert('点击删除！')">
-                                    删除
-                                </button>
-                            </a>
-                        </td>
-                    </tr>
-                </c:forEach>
-            </table>
-
-        </div>
-    </div>
-    <!--分页信息-->
-    <div class="row">
-        <%--分页文字信息--%>
-        <div class="col-md-6">
-            当前为第${pageInfo.pageNum}页，总共有${pageInfo.pages}页，共有${pageInfo.total}条记录
-        </div>
-        <%--	分页条--%>
-        <div class="col-md-6">
-            <nav aria-label="Page navigation">
-                <ul class="pagination">
-                    <li><a href="${pageContext.request.contextPath}/selectAllAirplanetype.do?pn=1">首页</a></li>
-                    <li>
-                        <c:if test="${pageInfo.hasPreviousPage}">
-                            <a href="${pageContext.request.contextPath}/selectAllAirplanetype.do?pn=${pageInfo.pageNum-1}"
-                               aria-label="Previous">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </c:if>
-                    </li>
-                    <c:forEach items="${pageInfo.navigatepageNums}" var="page_num">
-                        <c:if test="${page_num==pageInfo.pageNum}">
-                            <li class="active"><a
-                                    href="${pageContext.request.contextPath}/selectAllAirplanetype.do?pn=${page_num}">${page_num}</a>
-                            </li>
-                        </c:if>
-                        <c:if test="${page_num!=pageInfo.pageNum}">
-                            <li>
-                                <a href="${pageContext.request.contextPath}/selectAllAirplanetype.do?pn=${page_num}">${page_num}</a>
-                            </li>
-                        </c:if>
-                    </c:forEach>
-
-                    <li>
-                        <c:if test="${pageInfo.hasNextPage}">
-                            <a href="${pageContext.request.contextPath}/selectAllAirplanetype.do?pn=${pageInfo.pageNum+1}"
-                               aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
-                        </c:if>
-                    </li>
-                    <li><a href="${pageContext.request.contextPath}/selectAllAirplanetype.do?pn=${pageInfo.pages}">末页</a></li>
-                </ul>
-            </nav>
-        </div>
-            <div class="col-md-2">
-                <a href="${pageContext.request.contextPath}/jumpSuAdMain.do">返回主菜单</a>
-            </div>
-    </div>
-
 </div>
+<footer class="app-footer">
+    <div class="wrapper">
+        <span class="pull-right">2.1 <a href="#"><i class="fa fa-long-arrow-up"></i></a></span> © feiyiban2018 Copyright.
+    </div>
+</footer>
+<!-- Javascript Libs -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/Chart.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/bootstrap-switch.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/jquery.matchHeight-min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/select2.full.min.js"></script>
+<!-- Javascript -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/app.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/index.js"></script>
 </body>
-<script type="text/javascript">
-    function search(){
-        var name = $("#t1").val();
-        window.location.href="${pageContext.request.contextPath}/selectAirplanetypeByName.do?name="+name;
-    }
-</script>
 </html>

@@ -62,6 +62,36 @@ public class IOrdersServiceImpl implements IOrdersService {
     }
 
     @Override
+    public List<Orders> findOrdersBySta1() {
+        List<Orders> orders = ordersDao.selectOrdersBySta1();
+        if (orders.size() > 0) {
+            return orders;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public List<Orders> findOrdersBySta3() {
+        List<Orders> orders = ordersDao.selectOrdersBySta3();
+        if (orders.size() > 0) {
+            return orders;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public List<Orders> findOrdersBySta5() {
+        List<Orders> orders = ordersDao.selectOrdersBySta5();
+        if (orders.size() > 0) {
+            return orders;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
     public List<Orders> findOrdersByUserName(String user_name) {
         List<Orders> orders = ordersDao.selectOrdersByUserName(user_name);
         if (orders.size() > 0) {

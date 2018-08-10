@@ -23,6 +23,15 @@ public interface IOrdersService {
     //根据订单状态查询相应订单
     List<Orders> findOrdersByStatus(int status);
 
+    //已支付待审核
+    List<Orders> findOrdersBySta1();
+
+    //退票待审核
+    List<Orders> findOrdersBySta3();
+
+    //已完成
+    List<Orders> findOrdersBySta5();
+
     //根据用户名搜索相应订单
     List<Orders> findOrdersByUserName(String user_name);
 
