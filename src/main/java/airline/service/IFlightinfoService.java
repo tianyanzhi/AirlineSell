@@ -11,4 +11,5 @@ public interface IFlightinfoService {
     boolean moveFightinfo2(String airlinecompany_name);
     List<Flightinfo> findAllFlightinfo();
     List<Flightinfo> findFlightinfoByAirlinecompanyName(String airlinecompany_name);
+    List<Flightinfo> findFlightinfoByOther(String start,String end,String starttime,String endtime);
 }

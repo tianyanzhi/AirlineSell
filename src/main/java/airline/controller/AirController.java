@@ -16,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -193,7 +195,7 @@ public class AirController {
         return "/WEB-INF/airline/listFlightinfo.jsp";
     }
     @RequestMapping("/selectAllFlightinfo.do")
-    public String doSelectAllFlight(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
+    public String doSelectAllFlight(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model, HttpServletRequest request) {
         // 引入PageHelper分页插件
         // 在查询之前只需要调用，传入页码，以及每页的大小
         int pageSize = 10000;
@@ -211,7 +213,14 @@ public class AirController {
         List<Airplanetype> types = airplanetypeService.findAllAirplanetype();
         PageInfo typepage = new PageInfo(types, pageSize);
         model.addAttribute("pageForType", typepage);
-        return "/WEB-INF/airline/listFlightinfo.jsp";
+        HttpSession session =request.getSession();
+        if (session.getAttribute("admin")!=null) {
+            return "/WEB-INF/airline/listFlightinfo.jsp";
+        }
+        /*if (session.getAttribute("user")!=null) {
+            return "/WEB-INF/airline/listFlightinfoForUser.jsp";
+        }*/
+        return "/WEB-INF/airline/listFlightinfoForUser.jsp";
     }
 
     /*根据公司名查询航班*/
@@ -225,6 +234,30 @@ public class AirController {
         PageInfo page = new PageInfo(flightinfos, 5);
         model.addAttribute("pageInfo", page);
         return "/WEB-INF/airline/listFlightinfo.jsp";
+    }
+
+    /*根据其他信息查询航班*/
+    @RequestMapping("/jumpListFbyO.do")
+    public String jumpListFbyO(){ return "/WEB-INF/airline/listFlightinfo.jsp"; }
+    @RequestMapping("/SelectFlightinfoByOther.do")
+    public String doSelectFlightinfoByOther(@RequestParam(value = "pn", defaultValue = "1") Integer pn,HttpServletRequest request, Model model,String start,String end,String starttime,String endtime){
+        start=request.getParameter("start");
+        end=request.getParameter("end");
+        starttime=request.getParameter("starttime");
+        endtime=request.getParameter("endtime");
+        int pageSize = 5;
+        PageHelper.startPage(pn, pageSize);
+        List<Flightinfo> flightinfos = flightinfoService.findFlightinfoByOther(start, end,starttime,endtime);
+        PageInfo page = new PageInfo(flightinfos, 5);
+        model.addAttribute("pageInfo", page);
+        HttpSession session =request.getSession();
+        if (session.getAttribute("admin")!=null) {
+            return "/WEB-INF/airline/listFlightinfo.jsp";
+        }
+        /*if (session.getAttribute("user")!=null) {
+            return "/WEB-INF/airline/listFlightinfoForUser.jsp";
+        }*/
+        return "/WEB-INF/airline/listFlightinfoForUser.jsp";
     }
 
     /* 根据机型删除航班信息*/

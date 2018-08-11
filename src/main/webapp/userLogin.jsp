@@ -14,8 +14,9 @@
         <input type="submit" value="登录">
         <p align="center"><front size="2">${msg}</front></p>
     </form>
+    <a href="userRegister.jsp"><button type="button">注册</button></a>
     <a href="${pageContext.request.contextPath}/adminLogin.do"><button type="button">我是管理员</button></a>
-
 </center>
 </body>
+
 </html>

@@ -126,7 +126,8 @@
                                 <div id="dropdown-customer" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
-                                            <li><a href="customer_list">客户列表</a>
+                                            <li>
+                                                <a href="${pageContext.request.contextPath}/selectAllUser.do">客户列表</a>
                                             </li>
                                         </ul>
                                     </div>

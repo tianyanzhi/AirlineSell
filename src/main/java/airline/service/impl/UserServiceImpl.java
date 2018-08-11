@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("userService")
 public class UserServiceImpl implements IUserService {
     @Autowired
@@ -57,6 +59,16 @@ public class UserServiceImpl implements IUserService {
         if (user != null && user.getPassword().equals(password)) {
             return user;
         } else {
+            return null;
+        }
+    }
+
+    @Override
+    public List<User> findAllUser() {
+        List<User> users = userDao.selectAllUser();
+        if (users.size()>0){
+            return users;
+        }else {
             return null;
         }
     }

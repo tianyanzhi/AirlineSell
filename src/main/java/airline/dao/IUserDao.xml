@@ -21,5 +21,8 @@
     <select id="selectUserByAcname" resultType="User">
         select * from feiyiban.user where accountname = #{accountname}
     </select>
+    <select id="selectAllUser" resultType="User">
+        select * from feiyiban.user
+    </select>
 
 </mapper>

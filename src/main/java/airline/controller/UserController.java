@@ -1,5 +1,6 @@
 package airline.controller;
 
+import airline.bean.Admin;
 import airline.bean.User;
 import airline.bean.Userinfo;
 import airline.service.IUserService;
@@ -110,6 +111,20 @@ public class UserController {
         else
             return "/WEB-INF/user/fail.jsp";
     }
+
+
+    //列出所有用户，用于管理员查看所有顾客
+@RequestMapping("/selectAllUser.do")
+public String doSelectAllUser(@RequestParam(value = "pn", defaultValue = "1") Integer pn,Model model){
+    int pageSize = 10000;
+    PageHelper.startPage(pn,pageSize);
+    List<User> users = userService.findAllUser();
+    PageInfo page = new PageInfo(users,pageSize);
+    model.addAttribute("userList", page);
+    return "WEB-INF/user/listUser.jsp";
+}
+
+
 
     /***********************************用户登陆*********************************/
     @RequestMapping("/userLogin.do")

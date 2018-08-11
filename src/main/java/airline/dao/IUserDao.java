@@ -3,6 +3,8 @@ package airline.dao;
 
 import airline.bean.User;
 
+import java.util.List;
+
 public interface IUserDao {
     //添加一个用户
     int insertUser(User user);
@@ -21,4 +23,7 @@ public interface IUserDao {
 
     //登陆的实现，根据账户名查找密码
     User selectUserByAcname(String accountname);
+
+    //列出所有用户，管理员功能
+    List<User> selectAllUser();
 }

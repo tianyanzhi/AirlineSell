@@ -32,7 +32,7 @@
     </bean>
     <!--配置拦截器-->
     <mvc:interceptors>
-        <!--  管理员拦截器-->
+        <!--  登陆拦截器-->
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <bean class="airline.interceptor.LoginInterceptor"/>

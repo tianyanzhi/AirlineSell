@@ -29,5 +29,11 @@
     <select id="selectFlightinfoByAirlinecompanyName" resultType="Flightinfo">
         select flightnumber,airplanetype_name,airlinecompany_name,start,end,starttime,endtime,firstprice,businessprice,economyprice from flightinfo where airlinecompany_name like #{xxx} '%' order by flightnumber asc
     </select>
+    <!-- 根据信息查询航班信息-->
+    <select id="selectFlightinfoByOther" resultType="Flightinfo">
+        select flightnumber,airplanetype_name,airlinecompany_name,start,end,starttime,endtime,firstprice,businessprice,economyprice from flightinfo
+        where start like #{start} '%' and end like #{end} '%' and starttime like #{starttime} '%' and endtime like #{endtime} '%'
+        order by flightnumber asc
+    </select>
 
 </mapper>

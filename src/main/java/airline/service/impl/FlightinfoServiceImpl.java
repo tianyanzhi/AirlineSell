@@ -66,4 +66,13 @@ public class FlightinfoServiceImpl implements IFlightinfoService {
         else
         return null;
     }
+
+    @Override
+    public List<Flightinfo> findFlightinfoByOther(String start, String end,String starttime,String endtime) {
+        List<Flightinfo> flightinfos=flightinfoDao.selectFlightinfoByOther(start,end,starttime,endtime);
+        if (flightinfos.size()>0)
+            return flightinfos;
+        else
+            return null;
+    }
 }

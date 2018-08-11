@@ -3,6 +3,8 @@ package airline.service;
 
 import airline.bean.User;
 
+import java.util.List;
+
 public interface IUserService {
     //添加用户
     boolean addUser(User user);
@@ -21,4 +23,7 @@ public interface IUserService {
 
     //登陆检查，根据账户名查找密码是否对应
     public User checkLogin(String accountname, String password);
+
+    //列出所有用户
+    List<User> findAllUser();
 }

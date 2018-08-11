@@ -23,7 +23,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
         //获得请求的URL
         String url = httpServletRequest.getRequestURI();
-        if (url.contains("/checkLogin.do")||url.contains("/userCheckLogin.do")||url.contains("/adminLogin.do")) {
+        if (url.contains("/checkLogin.do")||url.contains("/userCheckLogin.do")||url.contains("/adminLogin.do")||url.contains("/SelectFlightinfoByOther.do")||url.contains("/addUser.do")||url.contains("/selectAllFlightinfo.do")) {
             return true;
         }
         HttpSession session = httpServletRequest.getSession();

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="fyb.airline.dao.IUserinfoDao">
+<mapper namespace="airline.dao.IUserinfoDao">
     <insert id="insertUserinfo" parameterType="User">
         insert into feiyiban.userinfo(user_acname,name,sex,phone,email,idnumber)values(#{user_acname},#{name},#{sex},#{phone},#{email},#{idnumber})
     </insert>
