@@ -17,7 +17,7 @@ ${user.accountname}
 用户身份证：${user.idnumber}<br>
 <a href="/jumpUpUserPwd.do">修改密码</a>!<br>
 <a href="/outLogin.do">退出登录</a>!<br>
-<a href="/jumpMyChengkeMessage.do">查看我的乘客信息</a>!<br>
+<a href="/selectAllUserinfo.do?user_acname=${user.accountname}">查看我的乘客信息</a>!<br>
 
 </body>
 </html>

@@ -2,6 +2,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <body>
-404 Error！<br>${msg}
+<meta http-equiv="Refresh" content="0;url=/selectAllUserinfo.do?user_acname=${user.accountname}">
 </body>
 </html>

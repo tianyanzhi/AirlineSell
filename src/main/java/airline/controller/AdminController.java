@@ -157,12 +157,13 @@ public class AdminController {
 
     //检查登陆
     @RequestMapping("/checkLogin.do")
-    public String checkLogin(Admin admin,Model model,HttpSession session){
+    public String checkLogin(Admin admin,Model model,HttpServletRequest request){
         //调用service方法
         admin = service.checkLogin(admin.getAccountname(), admin.getPassword());
         //System.err.println("##############################################################"+admin.getAuthority());
         //若有admin则添加到model里并且跳转到成功页面return "WEB-INF/admin/superAdminMain.jsp";
         if(admin != null){
+            HttpSession session =request.getSession();
             session.setAttribute("admin",admin);//可以根据管理员身份跳转
             if(admin.getAuthority()==2) {
                 return "redirect:jumpSuAdMain.do";

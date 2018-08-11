@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fyb.airline.dao.IUserinfoDao">
+    <insert id="insertUserinfo" parameterType="User">
+        insert into feiyiban.userinfo(user_acname,name,sex,phone,email,idnumber)values(#{user_acname},#{name},#{sex},#{phone},#{email},#{idnumber})
+    </insert>
+    <delete id="deleteUserinfo">
+        delete from feiyiban.userinfo where idnumber=#{idnumber}
+    </delete>
+    <update id="updateUserinfo" parameterType="User">
+        update feiyiban.userinfo set name=#{name},sex=#{sex},phone=#{phone},email=#{email} where user_acname=#{user_acname}
+    </update>
+    <select id="selectAllUserinfo" resultType="User">
+        select name,sex,phone,email,idnumber from feiyiban.userinfo where user_acname=#{user_acname}
+    </select>
+    <select id="selectUserinfoByName" resultType="User">
+        select name,sex,phone,email,idnumber from feiyiban.userinfo where user_acname=#{user_acname} and name like #{name} '%'
+    </select>
+</mapper>

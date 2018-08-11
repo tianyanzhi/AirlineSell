@@ -12,8 +12,10 @@
         用户名:<input name="accountname" type="text"><br>
         密码:<input name="password" type="password"><br>
         <input type="submit" value="登录">
-        <p align="center"><front size="2">${userMsg}</front></p>
+        <p align="center"><front size="2">${msg}</front></p>
     </form>
+    <a href="${pageContext.request.contextPath}/adminLogin.do"><button type="button">我是管理员</button></a>
+
 </center>
 </body>
 </html>
