@@ -1,5 +1,6 @@
 package airline.test;
 
+import airline.util.ImageUtil;
 import com.github.pagehelper.PageInfo;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,22 +25,26 @@ import org.springframework.web.context.WebApplicationContext;
  * @mark null
  * @Description
  */
-@RunWith(SpringJUnit4ClassRunner.class)
+/*@RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
-@ContextConfiguration(locations = {"classpath:spring.xml", "classpath:springmvc.xml"})
+@ContextConfiguration(locations = {"classpath:spring.xml", "classpath:springmvc.xml"})*/
 public class AdminTest {
-    // 传入Springmvc的ioc
+    /*// 传入Springmvc的ioc
     @Autowired
     WebApplicationContext context;
     // 虚拟mvc请求，获取到处理结果。
-    MockMvc mockMvc;
+    MockMvc mockMvc;*/
+
 
     @Before
     public void initMokcMvc() {
-        mockMvc = MockMvcBuilders.webAppContextSetup(context).build();
+        /*mockMvc = MockMvcBuilders.webAppContextSetup(context).build();*/
     }
 
-
+    @Test
+    public void image(){
+        System.out.println(ImageUtil.getBingEveryDayPicAdress());
+    }
 
 }
 

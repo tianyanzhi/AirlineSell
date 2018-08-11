@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="airline.util.ImageUtil" %>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -30,15 +32,41 @@
 <div class="container-fluid">
     <div class="side-body">
         <div class="page-title">
-            <span class="title">Card</span>
-            <div class="description">A card elements for use as Block. Profile card.</div>
+            <span class="title">主页</span>
+            <div class="description">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Here you can manage your database.</div>
         </div>
         <div class="row">
             <div class="col-xs-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="card-title">
-                            <div class="title">Card Block Title</div>
+                            <div class="title">${admin.accountname}，
+                                <%
+                                    Calendar cal = Calendar.getInstance();
+                                    int hour = cal.get(Calendar.HOUR_OF_DAY);
+                                    if (hour >= 6 && hour < 8) {
+                                %>
+                                早上好
+                                <%
+                                    } else if (hour >= 8 && hour < 11) {
+                                %>
+                                上午好
+                                <%
+                                    } else if (hour >= 11 && hour < 13) {
+                                %>
+                                中午好
+                                <%
+                                    } else if (hour >= 13 && hour < 18) {
+                                %>
+                                下午好
+                                <%
+                                    } else {
+                                %>
+                                晚上好
+                                <%
+                                    }
+                                %>
+                            </div>
                         </div>
                         <div class="pull-right card-action">
                             <div class="btn-group" role="group" aria-label="...">
@@ -47,10 +75,32 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div class="text-indent">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.</div>
-                        <div class="sub-title">Card Sub Title</div>
                         <div class="text-indent">
-                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option
+                            <h4 align="center">
+                                人生就象一场戏,因为有缘才相聚<br><br>
+                                &nbsp;&nbsp;&nbsp;相扶到老不容易,是否更该去珍惜<br><br>
+                                &nbsp;&nbsp;&nbsp;为了小事发脾气,回头想来又何必<br><br>
+                                &nbsp;&nbsp;&nbsp;别人生气我不气,气出病来无人替<br><br>
+                                &nbsp;&nbsp;&nbsp;我若气坏谁如意,而且伤神又费力<br><br>
+                                &nbsp;&nbsp;&nbsp;出门在外少管事,早去早归少惦记<br><br>
+                                &nbsp;&nbsp;&nbsp;邻居亲朋不要比,儿孙琐事随他去<br><br>
+                                &nbsp;&nbsp;&nbsp;娃娃降生皆欢喜,人到终年任他去<br><br>
+                                &nbsp;&nbsp;&nbsp;吃苦享乐在一起,神仙羡慕好伴侣<br><br>
+                                &nbsp;&nbsp;&nbsp;男女老少多注意,莫生气啊莫生气<br><br>
+                            </h4>
+                        </div>
+                        <div class="sub-title">Don't be angry</div>
+                        <div class="text-indent">
+                            Life is like a play, because predestined to get together.
+                            It is not easy to help each other to old age, should we cherish it more?
+                            If you lose your temper over a trifle, you don't have to come back to think about it.
+                            I am not angry with others; I am angry at my illness and there is no one to replace it.
+                            If the gas bad who is happy, but also mind-wracking and laborious.
+                            When away from home, take care of little things, and when early, go early, and return early, thinking of little.
+                            Don't compare with your neighbors, let your children and grandchildren take care of their trifles.
+                            When a baby is born, he will be glad to have it all the year round.
+                            The gods envy a good partner when they enjoy themselves together.
+                            Men and women, old and young, pay more attention. Don't be angry. Don't be angry.
                         </div>
                     </div>
                 </div>
@@ -61,10 +111,13 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Card Example</h4>
+                        <h4 class="modal-title" id="myModalLabel">公告版</h4>
                     </div>
                     <div class="modal-body no-padding">
                         <div id="code-preview-card" class="code-preview">
+                            <h1 align="center">今天没有公告！</h1>
+                            <%--<img width=100% height=100% url=(<%ImageUtil.getBingEveryDayPicAdress();%>)/>--%>
+                            <%--<iframe width=100% height=100% url=(https://www.baidu.com)></iframe>--%>
                         </div>
                     </div>
                 </div>
