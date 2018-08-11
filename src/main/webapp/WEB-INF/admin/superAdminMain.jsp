@@ -100,7 +100,7 @@
                             Don't compare with your neighbors, let your children and grandchildren take care of their trifles.
                             When a baby is born, he will be glad to have it all the year round.
                             The gods envy a good partner when they enjoy themselves together.
-                            Men and women, old and young, pay more attention. Don't be angry. Don't be angry.
+                            Men and women, old and young, pay more attention. Don't be angry. Laoge,suanle saunle .Don't be angry.
                         </div>
                     </div>
                 </div>

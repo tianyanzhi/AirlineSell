@@ -245,34 +245,4 @@ public class AirController {
 //    }
 
 
-/****************************管理员登陆***********************************/
-//    @RequestMapping("/login.do")
-//    public String login(){
-//        return "/WEB-INF/airline/login.jsp";
-//    }
-//    @RequestMapping("/addAdmin.do")
-//    public String addAdmin(Admin admin){
-//        if (adminService.addAdmin(admin))
-//            return "/index.jsp";
-//        else
-//            return "/addAdmin.jsp";
-//    }
-//
-//    @RequestMapping("/checkLogin.do")
-//    public String checkLogin(Admin admin, Model model){
-//        admin=adminService.selectAdminByAccountname(admin.getAccountname(),admin.getPassword());
-//        if(admin!=null){
-//            model.addAttribute("admin",admin);
-//            return "/success.jsp";
-//        }
-//        else
-//        return "redirect:login.do";
-//    }
-//
-//    @RequestMapping("/outLogin.do")
-//    public String outLogin(HttpSession session){
-//        session.invalidate();
-//        return "/login.jsp";
-//    }
-
 }

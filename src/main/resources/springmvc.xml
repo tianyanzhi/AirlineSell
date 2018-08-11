@@ -37,6 +37,11 @@
             <mvc:mapping path="/**"/>
             <bean class="airline.interceptor.AdminInterceptor"/>
         </mvc:interceptor>
+        <!--  用户拦截器-->
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="airline.interceptor.UserInterceptor"/>
+        </mvc:interceptor>
     </mvc:interceptors>
 
         </beans>
