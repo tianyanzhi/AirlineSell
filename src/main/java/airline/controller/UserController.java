@@ -138,7 +138,7 @@ public String doSelectAllUser(@RequestParam(value = "pn", defaultValue = "1") In
         if (user != null) {
             session.setAttribute("user", user);
             model.addAttribute("user", user);
-            return "/WEB-INF/user/welcome.jsp";
+            return "/index.jsp";
         }
         model.addAttribute("msg", "用户名或密码错误，请重新登录！");
         return "userLogin.jsp";

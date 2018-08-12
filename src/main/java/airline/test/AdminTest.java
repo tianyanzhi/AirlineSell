@@ -43,7 +43,7 @@ public class AdminTest {
 
     @Test
     public void image(){
-        System.out.println(ImageUtil.getBingEveryDayPicAdress());
+        System.out.print(ImageUtil.getBingEveryDayPicAdress());
     }
 
 }
