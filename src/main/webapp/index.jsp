@@ -25,7 +25,7 @@
 <br>
 <br>
 <div style="background: url(img/bg/main.jpg);" class="jumbotron">
-    <h1 align="right" style="color:white;">所爱隔山海，带你去旅行&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
+    <h1 align="right" style="color:white;font-family: 即墨体;">所爱隔山海，带你去旅行&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h1>
     <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-6 col-md-5">

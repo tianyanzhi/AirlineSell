@@ -25,7 +25,6 @@
     价格<input type="text" name="price"><br>
     <input type="hidden" name="status" value=1><br>
     <input type="submit" value="添加">
-
 </form>
 </body>
 </html>

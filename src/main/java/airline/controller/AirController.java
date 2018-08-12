@@ -1,12 +1,7 @@
 package airline.controller;
 
-import airline.bean.Airlinecompany;
-import airline.bean.Airplanetype;
-import airline.bean.Flightinfo;
-import airline.service.IAdminService;
-import airline.service.IAirlinecompanyService;
-import airline.service.IAirplanetypeService;
-import airline.service.IFlightinfoService;
+import airline.bean.*;
+import airline.service.*;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +29,18 @@ public class AirController {
     @Autowired
     @Qualifier("flightinfoService")
     private IFlightinfoService flightinfoService;
+
+    @Autowired
+    @Qualifier("userinfoService")
+    private IUserinfoService userinfoService;
+
+    public IUserinfoService getUserinfoService() {
+        return userinfoService;
+    }
+
+    public void setUserinfoService(IUserinfoService userinfoService) {
+        this.userinfoService = userinfoService;
+    }
 
     public AirController(IAdminService adminService, IAirlinecompanyService airlinecompanyService, IAirplanetypeService airplaneService, IFlightinfoService flightinfoService) {
         this.adminService = adminService;
@@ -213,6 +220,12 @@ public class AirController {
         List<Airplanetype> types = airplanetypeService.findAllAirplanetype();
         PageInfo typepage = new PageInfo(types, pageSize);
         model.addAttribute("pageForType", typepage);
+        //尝试解决乘车人信息实时下拉框
+        HttpSession usersession =request.getSession();
+        User user = (User) usersession.getAttribute("user");
+        List<Userinfo> userinfos = userinfoService.findAllUserinfo(user.getAccountname());
+        PageInfo userinfopage = new PageInfo(userinfos, pageSize);
+        model.addAttribute("pageForUserinfo", userinfopage);
         HttpSession session =request.getSession();
         if (session.getAttribute("admin")!=null) {
             return "/WEB-INF/airline/listFlightinfo.jsp";

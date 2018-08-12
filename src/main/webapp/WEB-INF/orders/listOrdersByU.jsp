@@ -197,11 +197,5 @@
 
 
 </body>
-<script type="text/javascript">
-    function search(){
-        var name = $("#t1").val();
-        window.location.href="${pageContext.request.contextPath}/selectAdminByName.do?name="+name;
-    }
-</script>
 </html>
 
