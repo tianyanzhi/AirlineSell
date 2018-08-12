@@ -2,6 +2,7 @@ package airline.controller;
 
 import airline.bean.Admin;
 import airline.bean.Orders;
+import airline.bean.User;
 import airline.service.IOrdersService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -71,12 +73,20 @@ public class OrdersController {
         return "WEB-INF/orders/updateOrderStatus.jsp";
     }
     @RequestMapping("updateOrderStatus.do")
-    public String doUpdateOrderStatus(Orders order){
+    public String doUpdateOrderStatus(Orders order,HttpServletRequest request){
+        HttpSession session =request.getSession();
+        User user = (User) session.getAttribute("user");
         if (service.alterOrderStatus(order)){
             if(order.getStatus()==2){
                 return "redirect:showOrdersBySta1.do";
             }else if (order.getStatus()==4){
                 return "redirect:showOrdersBySta3.do";
+            }else if (order.getStatus()==1){//用户下单了,不在这里跳转
+                return "redirect:showOrdersBySta1.do";
+            }else if (order.getStatus()==3){
+                return "redirect:showOrdersByStaAndName.do?user_name="+user.getAccountname()+"&status=2";
+            } else if (order.getStatus()==5){
+                return "redirect:showOrdersByStaAndName.do?user_name="+user.getAccountname()+"&status=2";
             } else {
                 return "/Exception/errors.jsp";
             }
