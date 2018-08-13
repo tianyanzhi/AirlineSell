@@ -35,7 +35,7 @@
                         <h3 class="panel-title" align="center"><big>用户注册</big></h3>
                     </div>
                     <div class="panel-body">
-                        <form class="form-horizontal" action="${pageContext.request.contextPath}/addUser.do" method="post">
+                        <form name="resform" class="form-horizontal" action="${pageContext.request.contextPath}/addUser.do" method="post">
                             <div class="form-group">
                                 <label for="input1" class="col-sm-2 control-label" style="color:#313335;">用户名</label>
                                 <div class="col-sm-10">
@@ -60,10 +60,27 @@
                                     <input type="text" class="form-control" id="input4" name="name" required placeholder="">
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <%--<div class="form-group">
                                 <label for="input5" class="col-sm-2 control-label" style="color:#313335;">性别</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="input5" name="sex" required placeholder="">
+                                </div>
+                            </div>--%>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label" style="color:#313335;">性别</label>
+                                <div class="col-sm-10">
+                                    <div class="radio3 radio-check radio-success radio-inline">
+                                        <input type="radio" id="radio4" name="sex" required value="1">
+                                        <label for="radio4">
+                                            帅哥
+                                        </label>
+                                    </div>
+                                    <div class="radio3 radio-check radio-success radio-inline">
+                                        <input type="radio" id="radio5" name="sex" value="0">
+                                        <label for="radio5">
+                                            美女
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -135,6 +152,11 @@
         var p2=$("#input3").val();//获取重新输入的密码值
         if(p1!=p2){//判断两次输入的值是否一致，不一致则显示错误信息
             alert("两次密码不一致！");
+            resform.password.focus() ;
+            return false;
+        }else if(resform.password.value.length<6){
+            alert("位数不能少于6位");
+            resform.password.focus() ;
             return false;
         }
         else{
