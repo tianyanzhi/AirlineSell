@@ -22,6 +22,14 @@
         set status = #{status}
         where id = #{id}
     </update>
+    <select id="selectAllOrders" resultType="Orders">
+        select id, user_name, userinfo_name,user_phone,
+      user_idcard, flight_num, flight_start,
+      flight_end, flight_starttime, flight_endtime,
+      price, status, genetime,
+      printtime, returntime, paytime
+        from feiyiban.orders
+    </select>
     <select id="selectOrdersByStatus" resultType="Orders">
         select id, user_name, userinfo_name,user_phone,
       user_idcard, flight_num, flight_start,

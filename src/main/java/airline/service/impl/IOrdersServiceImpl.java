@@ -52,6 +52,16 @@ public class IOrdersServiceImpl implements IOrdersService {
     }
 
     @Override
+    public List<Orders> findAllOrders() {
+        List<Orders> orders = ordersDao.selectAllOrders();
+        if (orders.size() > 0) {
+            return orders;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
     public List<Orders> findOrdersByStatus(int status) {
         List<Orders> orders = ordersDao.selectOrdersByStatus(status);
         if (orders.size() > 0) {

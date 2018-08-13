@@ -220,12 +220,17 @@ public class AirController {
         List<Airplanetype> types = airplanetypeService.findAllAirplanetype();
         PageInfo typepage = new PageInfo(types, pageSize);
         model.addAttribute("pageForType", typepage);
-        //尝试解决乘车人信息实时下拉框
-        HttpSession usersession =request.getSession();
+        //尝试解决乘车人信息实时下拉框，失败
+        /*HttpSession usersession =request.getSession();
         User user = (User) usersession.getAttribute("user");
         List<Userinfo> userinfos = userinfoService.findAllUserinfo(user.getAccountname());
         PageInfo userinfopage = new PageInfo(userinfos, pageSize);
-        model.addAttribute("pageForUserinfo", userinfopage);
+        model.addAttribute("pageForUserinfo", userinfopage);*/
+        //强行产生冗余代码弥补技术不足，失败
+//        PageInfo userinfopage2 = new PageInfo(userinfos, pageSize);
+//        model.addAttribute("pageForUserinfo2", userinfopage2);
+//        PageInfo userinfopage3 = new PageInfo(userinfos, pageSize);
+//        model.addAttribute("pageForUserinfo3", userinfopage3);
         HttpSession session =request.getSession();
         if (session.getAttribute("admin")!=null) {
             return "/WEB-INF/airline/listFlightinfo.jsp";
@@ -270,6 +275,10 @@ public class AirController {
         /*if (session.getAttribute("user")!=null) {
             return "/WEB-INF/airline/listFlightinfoForUser.jsp";
         }*/
+        if (flightinfos==null){
+            model.addAttribute("msg", "没有找到指定航班信息，请放宽查询条件");
+            return "/WEB-INF/airline/listFlightinfoForUser.jsp";
+        }
         return "/WEB-INF/airline/listFlightinfoForUser.jsp";
     }
 

@@ -58,6 +58,7 @@
                             <button type="submit" class="btn btn-primary">搜索</button>
                         </div>
                     </div>
+                    <center>${msg}</center>
                 </form>
             </div>
 
@@ -92,55 +93,87 @@
                         <td>${flightinfo.businessprice}</td>
                         <td>${flightinfo.economyprice}</td>
                         <td>
-                                <button type="button" class="btn btn-danger  btn-sm" data-toggle="modal" data-target="#modalPrimary">预定</button>
+                                <button type="button" class="btn btn-info  btn-sm" data-toggle="modal" data-target="#modalPrimary">预定</button>
                                 <!-- Modal -->
                                 <div class="modal fade modal-primary" id="modalPrimary" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                                <h4 class="modal-title" id="myModalLabel">选择乘客与舱位</h4>
+                                                <h4 class="modal-title" id="myModalLabel">选择舱位</h4>
                                             </div>
                                             <div class="modal-body">
                                                 <form class="form-horizontal" action="${pageContext.request.contextPath}/addOrder.do" method="post">
-                                                    <input type="hidden" name="user_name">
-                                                    <input type="hidden" name="userinfo_name">
-                                                    <input type="hidden" name="user_phone">
-                                                    <input type="hidden" name="user_idcard">
+                                                    <input type="hidden" name="user_name" value="${user.accountname}">
+                                                    <input type="hidden" name="userinfo_name" value="${user.name}">
+                                                    <input type="hidden" name="user_phone" value="${user.phone}">
+                                                    <input type="hidden" name="user_idcard" value="${user.idnumber}">
                                                     <input type="hidden" name="flight_num" value=${flightinfo.flightnumber}>
                                                     <input type="hidden" name="flight_start" value=${flightinfo.start}>
                                                     <input type="hidden" name="flight_end" value=${flightinfo.end}>
                                                     <input type="hidden" name="flight_starttime" value=${flightinfo.starttime}>
                                                     <input type="hidden" name="flight_endtime" value=${flightinfo.endtime}>
-                                                    <div class="form-group">
+                                                    <input type="hidden" name="status" value=1>
+                                                    <!--流下了没有技术的泪水，向不能选择乘客妥协-->
+                                                    <%--<div class="form-group">
                                                         <label for="inputuser" class="col-sm-2 control-label" style="color:black;">乘客</label>
                                                         <div class="col-sm-10">
-                                                            <%--<input type="text" class="form-control" id="inputuser" name="start" placeholder="">--%>
-
-
-
-                                                            <select class="form-control" id="inputuser" required name="user_name">
+                                                            <select class="form-control" id="inputuser" required name="userinfo_name">
                                                                 <option value=${user.name}>${user.name}</option>
                                                                 <c:forEach items="${pageForUserinfo.list}" var="userinfo">
                                                                     <option value="${userinfo.name}">${userinfo.name}</option>
+                                                                    <c:if test="${userinfo_name==userinfo.name}">
+                                                                        <c:set var="phone" value="${userinfo.phone}"></c:set>
+                                                                        <c:set var="idcard" value="${userinfo.idnumber}"></c:set>
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                            </select>
+                                                            <c:if test="${userinfo_name==user.name}">
+                                                                <input type="hidden" name="user_phone" value="${user.phone}">
+                                                                <input type="hidden" name="user_idcard" value="${user.idnumber}">
+                                                            </c:if>
+                                                            <c:if test="${userinfo_name!=user.name}">
+                                                                <input type="hidden" name="user_phone" value="${phone}">
+                                                                <input type="hidden" name="user_idcard" value="${idcard}">
+                                                            </c:if>
+                                                        </div>
+                                                    </div>--%>
+                                                    <%--<div class="form-group">
+                                                        <label for="inputuser2" class="col-sm-2 control-label" style="color:black;">电话</label>
+                                                        <div class="col-sm-10">
+                                                            <select class="form-control" id="inputuser2" required name="user_phone">
+                                                                <option value=${user.phone}>${user.phone}</option>
+                                                                <c:forEach items="${pageForUserinfo2.list}" var="userinfo2">
+                                                                    <option value="${userinfo2.phone}">${userinfo2.phone}</option>
                                                                 </c:forEach>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
+                                                        <label for="inputuser3" class="col-sm-2 control-label" style="color:black;">身份证</label>
+                                                        <div class="col-sm-10">
+                                                            <select class="form-control" id="inputuser3" required name="user_idcard">
+                                                                <option value=${user.idcard}>${user.idcard}</option>
+                                                                <c:forEach items="${pageForUserinfo3.list}" var="userinfo3">
+                                                                    <option value="${userinfo3.idcard}">${userinfo3.idcard}</option>
+                                                                </c:forEach>
+                                                            </select>
+                                                        </div>
+                                                    </div>--%>
+                                                    <div class="form-group">
                                                         <label for="inputtype" class="col-sm-2 control-label" style="color:black;">舱位</label>
                                                         <div class="col-sm-10">
                                                                 <%--<input type="text" class="form-control" id="inputuser" name="start" placeholder="">--%>
-                                                            <select class="form-control" id="inputtype">
-                                                                <option name="price" value="${flightinfo.firstprice}">头等舱</option>
-                                                                <option name="price" value="${flightinfo.businessprice}">商务舱</option>
-                                                                <option name="price" value="${flightinfo.economyprice}">经济舱</option>
+                                                            <select class="form-control" id="inputtype" name="price">
+                                                                <option value="${flightinfo.firstprice}">头等舱</option>
+                                                                <option value="${flightinfo.businessprice}">商务舱</option>
+                                                                <option value="${flightinfo.economyprice}">经济舱</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <div class="col-sm-offset-2 col-sm-10">
-                                                            <button type="submit" class="btn btn-primary">确认并支付</button>
+                                                            <button type="submit" class="btn btn-primary" onclick="alert('恭喜获得免单机会，支付成功！')">确认并支付</button>
                                                         </div>
                                                     </div>
                                                 </form>

@@ -20,6 +20,9 @@ public interface IOrdersService {
     //订单状态更改
     boolean alterOrderStatus(Orders order);
 
+    //查询所有订单
+    List<Orders> findAllOrders();
+
     //根据订单状态查询相应订单
     List<Orders> findOrdersByStatus(int status);
 

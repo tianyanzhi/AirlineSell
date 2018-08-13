@@ -62,7 +62,7 @@ public class OrdersController {
         order.setFlight_starttime(Timestamp.valueOf(edtimen));
         System.err.println("#################################################################"+order.getFlight_starttime());*/
         if (service.addOrder(order)){
-            return "WEB-INF/orders/success.jsp";
+            return "redirect:selectAllFlightinfo.do";
         }else {
             return "/Exception/errors.jsp";
         }
@@ -106,7 +106,21 @@ public class OrdersController {
         List<Orders> orders = service.findOrdersByStatus(status);
         PageInfo page = new PageInfo(orders, pageSize);
         model.addAttribute("pageInfo", page);
-        return "WEB-INF/orders/listOrdersByA.jsp";
+        //尝试做一个实时图表
+        List<Orders> allOrders = service.findAllOrders();
+        model.addAttribute("allOrders",allOrders);
+        System.err.println("########################################"+allOrders.size());
+        List<Orders> orders1 = service.findOrdersBySta1();
+        model.addAttribute("orders1",orders1);
+        List<Orders> orders2 = service.findOrdersBySta3();
+        model.addAttribute("orders2",orders2);
+        List<Orders> orders3 = service.findOrdersBySta5();
+        model.addAttribute("orders3",orders3);
+        if (status==5){
+            return "WEB-INF/orders/chart.jsp";
+        }else {
+            return "WEB-INF/orders/listOrdersByA.jsp";
+        }
     }
     /*@RequestMapping("jumpShowOrdersBS1.do")//尝试解决导航栏无法实现动作脚本，失败
     public String jumpShowOrdersBS1(){

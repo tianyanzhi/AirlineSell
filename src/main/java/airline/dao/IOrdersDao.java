@@ -22,6 +22,8 @@ public interface IOrdersDao {
     int updateOrderStatus(Orders order);
 
     //列出所有订单,不打算做这个功能
+    //但是为了做个报表，我反手写一个
+    //原来不用搞总数，血亏
     List<Orders> selectAllOrders();
 
     //  列出未通过审核的订单     status=1&status=3
