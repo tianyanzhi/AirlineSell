@@ -177,7 +177,7 @@
                                 <div id="dropdown-report" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <ul class="nav navbar-nav">
-                                            <li><a href="${pageContext.request.contextPath}/showOrdersBySta.do?status=5">统计分析</a>
+                                            <li><a href="${pageContext.request.contextPath}/showOrdersBySta5.do">统计分析</a>
                                             <li><a href="${pageContext.request.contextPath}/jumpTicketPrint.do">打印机票</a>
                                             </li>
                                         </ul>

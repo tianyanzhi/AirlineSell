@@ -30,7 +30,7 @@
                 <button type="submit" class="btn btn-default">搜索</button>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="${pageContext.request.contextPath}/selectAllFlightinfo.do">预约航班</a></li>
+                <li><a href="${pageContext.request.contextPath}/selectAllFlightinfoFU.do">预约航班</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我的订单 <span class="caret"></span></a>
                     <ul class="dropdown-menu">

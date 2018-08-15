@@ -93,7 +93,7 @@ public class AirController {
     public String jumpListAa(){ return "/WEB-INF/airline/listAirplanetype.jsp"; }
     @RequestMapping("/selectAllAirplanetype.do")
     public String doSelectAllAirplanetype(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
-        int pageSize = 10000;
+        int pageSize = 1000;
         PageHelper.startPage(pn, pageSize);
         List<Airplanetype> airplanetypes = airplanetypeService.findAllAirplanetype();
         PageInfo page = new PageInfo(airplanetypes, pageSize);
@@ -152,7 +152,7 @@ public class AirController {
     public String jumpListAc(){ return "/WEB-INF/airline/listAirlinecompany.jsp"; }
     @RequestMapping("/selectAllAirlinecompany.do")
     public String doSelectAllAirlinecompany(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
-        int pageSize = 10000;
+        int pageSize = 1000;
         PageHelper.startPage(pn, pageSize);
         List<Airlinecompany> airlinecompanies = airlinecompanyService.findAllAirlinecompany();
         PageInfo page = new PageInfo(airlinecompanies, pageSize);
@@ -196,16 +196,16 @@ public class AirController {
             return "/WEB-INF/airline/fail.jsp";
     }
 
-    /*查询所有航班*/
+    /*管理员查询所有航班*/
     @RequestMapping("/jumpListAf.do")
     public String jumpListAf(){
-        return "/WEB-INF/airline/listFlightinfo.jsp";
+        return "redirect:selectAllFlightinfo.do";
     }
     @RequestMapping("/selectAllFlightinfo.do")
     public String doSelectAllFlight(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model, HttpServletRequest request) {
         // 引入PageHelper分页插件
         // 在查询之前只需要调用，传入页码，以及每页的大小
-        int pageSize = 10000;
+        int pageSize = 1000;
         PageHelper.startPage(pn, pageSize);
         // startPage后面紧跟的这个查询就是一个分页查询
         List<Flightinfo> flightinfos = flightinfoService.findAllFlightinfo();
@@ -235,11 +235,26 @@ public class AirController {
         if (session.getAttribute("admin")!=null) {
             return "/WEB-INF/airline/listFlightinfo.jsp";
         }
-        /*if (session.getAttribute("user")!=null) {
-            return "/WEB-INF/airline/listFlightinfoForUser.jsp";
-        }*/
+        return "/WEB-INF/airline/fail.jsp";
+    }
+
+    /*用户查询所有航班*/
+    @RequestMapping("/jumpListAfFU.do")
+    public String jumpListAfFU(){
+        return "redirect:selectAllFlightinfoFU.do";
+    }
+    @RequestMapping("/selectAllFlightinfoFU.do")
+    public String doSelectAllFlightFU(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model) {
+        int pageSize = 5;
+        PageHelper.startPage(pn, pageSize);
+        List<Flightinfo> flightinfos = flightinfoService.findAllFlightinfo();
+        PageInfo page = new PageInfo(flightinfos, pageSize);
+        model.addAttribute("pageInfo", page);
         return "/WEB-INF/airline/listFlightinfoForUser.jsp";
     }
+
+
+
 
     /*根据公司名查询航班*/
     @RequestMapping("/jumpListFbyN.do")
@@ -256,7 +271,7 @@ public class AirController {
 
     /*根据其他信息查询航班*/
     @RequestMapping("/jumpListFbyO.do")
-    public String jumpListFbyO(){ return "/WEB-INF/airline/listFlightinfo.jsp"; }
+    public String jumpListFbyO(){ return "redirect:SelectFlightinfoByOther.do"; }
     @RequestMapping("/SelectFlightinfoByOther.do")
     public String doSelectFlightinfoByOther(@RequestParam(value = "pn", defaultValue = "1") Integer pn,HttpServletRequest request, Model model,String start,String end,String starttime,String endtime){
         start=request.getParameter("start");
@@ -264,22 +279,17 @@ public class AirController {
         starttime=request.getParameter("starttime");
         endtime=request.getParameter("endtime");
         int pageSize = 5;
-        PageHelper.startPage(pn, pageSize);
-        List<Flightinfo> flightinfos = flightinfoService.findFlightinfoByOther(start, end,starttime,endtime);
-        PageInfo page = new PageInfo(flightinfos, 5);
-        model.addAttribute("pageInfo", page);
-        HttpSession session =request.getSession();
-        if (session.getAttribute("admin")!=null) {
-            return "/WEB-INF/airline/listFlightinfo.jsp";
-        }
-        /*if (session.getAttribute("user")!=null) {
+        if (flightinfoService.findFlightinfoByOther(start,end,starttime,endtime)!=null){
+            PageHelper.startPage(pn, pageSize);
+            List<Flightinfo> flightinfos = flightinfoService.findFlightinfoByOther(start,end,starttime,endtime);
+            PageInfo page = new PageInfo(flightinfos, 5);
+            model.addAttribute("pageInfo", page);
             return "/WEB-INF/airline/listFlightinfoForUser.jsp";
-        }*/
-        if (flightinfos==null){
+        }if (flightinfoService.findFlightinfoByOther(start,end,starttime,endtime)==null){
             model.addAttribute("msg", "没有找到指定航班信息，请放宽查询条件");
-            return "/WEB-INF/airline/listFlightinfoForUser.jsp";
+            return "/WEB-INF/error/noData.jsp";
         }
-        return "/WEB-INF/airline/listFlightinfoForUser.jsp";
+        return "/WEB-INF/airline/fail.jsp";
     }
 
     /* 根据机型删除航班信息*/

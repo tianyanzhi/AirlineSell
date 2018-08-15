@@ -62,7 +62,7 @@ public class OrdersController {
         order.setFlight_starttime(Timestamp.valueOf(edtimen));
         System.err.println("#################################################################"+order.getFlight_starttime());*/
         if (service.addOrder(order)){
-            return "redirect:selectAllFlightinfo.do";
+            return "redirect:selectAllFlightinfoFU.do";
         }else {
             return "/Exception/errors.jsp";
         }
@@ -94,30 +94,21 @@ public class OrdersController {
             return "/Exception/errors.jsp";
         }
     }
-    //根据订单状态查询相应订单
+    //根据订单状态查询相应订单，有管理员
     @RequestMapping("jumpShowOrdersBS.do")
     public String jumpShowOrdersBS(){
         return "WEB-INF/orders/listOrdersBySome.jsp";
     }
     @RequestMapping("showOrdersBySta.do")
     public String doShowOrdersBySta(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model, int status){
-        int pageSize = 10000;
+        int pageSize = 1000;
         PageHelper.startPage(pn, pageSize);
         List<Orders> orders = service.findOrdersByStatus(status);
         PageInfo page = new PageInfo(orders, pageSize);
         model.addAttribute("pageInfo", page);
-        //尝试做一个实时图表
-        List<Orders> allOrders = service.findAllOrders();
-        model.addAttribute("allOrders",allOrders);
-        System.err.println("########################################"+allOrders.size());
-        List<Orders> orders1 = service.findOrdersBySta1();
-        model.addAttribute("orders1",orders1);
-        List<Orders> orders2 = service.findOrdersBySta3();
-        model.addAttribute("orders2",orders2);
-        List<Orders> orders3 = service.findOrdersBySta5();
-        model.addAttribute("orders3",orders3);
-        if (status==5){
-            return "WEB-INF/orders/chart.jsp";
+        if (orders.size()==0){
+            model.addAttribute("msg", "您还没有相关订单哦，赶紧去拉客吧！");
+            return "WEB-INF/error/noUserOrders.jsp";
         }else {
             return "WEB-INF/orders/listOrdersByA.jsp";
         }
@@ -130,35 +121,45 @@ public class OrdersController {
     public String jumpShowOrdersBS3(){
         return "redirect:showOrdersBySta.do?status=3";
     }*/
-    //支付待审核
+    //支付待审核，有管理员
     @RequestMapping("showOrdersBySta1.do")
     public String doShowOrdersBySta1(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model){
-        int pageSize = 10000;
+        int pageSize = 1000;
         PageHelper.startPage(pn, pageSize);
         List<Orders> orders = service.findOrdersBySta1();
         PageInfo page = new PageInfo(orders, pageSize);
         model.addAttribute("pageInfo", page);
         return "WEB-INF/orders/listOrdersByA.jsp";
     }
-    //退票待审核
+    //退票待审核，有管理员
     @RequestMapping("showOrdersBySta3.do")
     public String doShowOrdersBySta3(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model){
-        int pageSize = 10000;
+        int pageSize = 1000;
         PageHelper.startPage(pn, pageSize);
         List<Orders> orders = service.findOrdersBySta3();
         PageInfo page = new PageInfo(orders, pageSize);
         model.addAttribute("pageInfo", page);
         return "WEB-INF/orders/listOrdersByA.jsp";
     }
-    //已完成
+    //已完成，有管理员
     @RequestMapping("showOrdersBySta5.do")
     public String doShowOrdersBySta5(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model){
-        int pageSize = 10000;
+        int pageSize = 1000;
         PageHelper.startPage(pn, pageSize);
         List<Orders> orders = service.findOrdersBySta5();
         PageInfo page = new PageInfo(orders, pageSize);
         model.addAttribute("pageInfo", page);
-        return "WEB-INF/orders/listOrdersByA.jsp";
+        //尝试做一个实时图表
+        List<Orders> allOrders = service.findAllOrders();
+        model.addAttribute("allOrders",allOrders);
+        System.err.println("########################################"+allOrders.size());
+        List<Orders> orders1 = service.findOrdersBySta1();
+        model.addAttribute("orders1",orders1);
+        List<Orders> orders2 = service.findOrdersBySta3();
+        model.addAttribute("orders2",orders2);
+        List<Orders> orders3 = service.findOrdersBySta5();
+        model.addAttribute("orders3",orders3);
+        return "WEB-INF/orders/chart.jsp";
     }
 
     //根据用户名查询相应订单,保留，暂时不实现
@@ -205,10 +206,15 @@ public class OrdersController {
     @RequestMapping("showOrdersByStaAndName.do")
     public String doShowOrdersByStaAndName(@RequestParam(value = "pn", defaultValue = "1") Integer pn, Model model, int status, String user_name){
         int pageSize = 5;
-        PageHelper.startPage(pn, pageSize);
-        List<Orders> orders = service.findOrdersByStatusAndName(status,user_name);
-        PageInfo page = new PageInfo(orders, 5);
-        model.addAttribute("pageInfo", page);
-        return "WEB-INF/orders/listOrdersByU.jsp";
+        if(service.findOrdersByStatusAndName(status,user_name)!=null){
+            PageHelper.startPage(pn, pageSize);
+            List<Orders> orders = service.findOrdersByStatusAndName(status,user_name);
+            PageInfo page = new PageInfo(orders, pageSize);
+            model.addAttribute("pageInfo", page);
+            return "WEB-INF/orders/listOrdersByU.jsp";
+        }else {
+            model.addAttribute("msg", "您还没有相关订单哦，赶紧去创建一些吧！");
+            return "WEB-INF/error/noUserOrders.jsp";
+        }
     }
 }
